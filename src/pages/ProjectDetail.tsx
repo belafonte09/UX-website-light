@@ -8,6 +8,7 @@ import DunningLetterAfterInteractive from '@/components/prototype/DunningLetterA
 import DunningLetterVisual from '@/components/prototype/DunningLetterVisual';
 import SimpleArrowPrompt from '@/components/SimpleArrowPrompt';
 import KeyInsightCard from '@/components/KeyInsightCard';
+import NumberImpactCard from '@/components/NumberImpactCard';
 import GoalCard from '@/components/GoalCard';
 import ImpactCard from '@/components/ImpactCard';
 
@@ -153,6 +154,77 @@ interface ProjectDetailProps {
       };
       modernLayout?: boolean;
       abstractGraphics?: boolean;
+      research?: {
+        title: string;
+        description: string;
+        emailResearch?: {
+          findings: string[];
+          images: string[];
+        };
+        uxuiAudit?: {
+          title: string;
+          findings: string[];
+          image: string;
+        };
+        qualitativeInterviews?: {
+          title: string;
+          insights: Array<{
+            quote: string;
+            author: string;
+          }>;
+        };
+        keyInsightCards?: Array<{
+          insight: string;
+          update: string;
+        }>;
+        userJourney?: {
+          title: string;
+          description: string;
+        };
+        impactVsEffort?: {
+          title: string;
+          description: string;
+        };
+      };
+      goals?: {
+        title: string;
+        description: string;
+        objectives: Array<{
+          title: string;
+          description: string;
+        }>;
+      };
+      emailUpdates?: {
+        title: string;
+        description: string;
+        image: string;
+        keyUpdates: {
+          insight: string[];
+          update: string;
+        };
+      };
+      impactSummary?: {
+        title: string;
+        description: string;
+        highlightCards: Array<{
+          percentage: string;
+          description: string;
+        }>;
+        kpiTable: Array<{
+          kpi: string;
+          before: string;
+          after: string;
+        }>;
+        testimonial: {
+          quote: string;
+          author: string;
+        };
+      };
+      finalSolution?: {
+        title: string;
+        description: string;
+        improvements: string[];
+      };
     }>;
   };
 }
@@ -220,8 +292,13 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                     {/* Main Title */}
                     <div className="mb-16">
                       <h1 className="text-5xl md:text-6xl font-sora font-bold text-foreground leading-tight lg:leading-relaxed mb-8">
-                        Simplifying Compliance<br />
-                        Through Better Data Visibility
+                        {project.name === "Simplifying Compliance Through Better Data Visibility" ? (
+                          <>Simplifying Compliance<br />Through Better Data Visibility</>
+                        ) : project.overview.title && project.overview.subtitle ? (
+                          <>{project.overview.title}<br /><span className="text-4xl md:text-5xl">{project.overview.subtitle}</span></>
+                        ) : (
+                          project.overview.title || project.name
+                        )}
                       </h1>
                     </div>
 
@@ -233,22 +310,45 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
 
                       <div className="space-y-8 lg:space-y-16">
                         <p className="text-lg font-work-sans text-foreground leading-relaxed">
-                          In the world of insurance, compliance is everything. Our company works with{' '}
-                          <span className="font-bold">many distribution partners</span> — each selling policies to customers on our behalf.
-                          To ensure every policy sold follows strict rules and regulations, our underwriting
-                          team must review a document called a <span className="font-bold">BDX file (Bordereaux file)</span>.
+                          {project.name === "Simplifying Compliance Through Better Data Visibility" ? (
+                            <>
+                              In the world of insurance, compliance is everything. Our company works with{' '}
+                              <span className="font-bold">many distribution partners</span> — each selling policies to customers on our behalf.
+                              To ensure every policy sold follows strict rules and regulations, our underwriting
+                              team must review a document called a <span className="font-bold">BDX file (Bordereaux file)</span>.
+                            </>
+                          ) : (
+                            project.overview.description
+                          )}
                         </p>
 
                         {/* Info Card Component */}
                         <div className="w-full">
                           <div className="bg-white border border-stroke rounded-2xl p-8 shadow-sm">
                             <h3 className="text-card-heading text-purple mb-6">
-                              What is a BDX file?
+                              {project.name === "Simplifying Compliance Through Better Data Visibility"
+                                ? "What is a BDX file?"
+                                : "Key Challenge"}
                             </h3>
                             <p className="text-card-body text-foreground leading-relaxed">
-                              Think of it as a giant spreadsheet sent by each partner every month. It
-                              lists every policy they sold, who bought it, when, for how much, and under
-                              what terms.
+                              {project.name === "Simplifying Compliance Through Better Data Visibility" ? (
+                                <>
+                                  Think of it as a giant spreadsheet sent by each partner every month. It
+                                  lists every policy they sold, who bought it, when, for how much, and under
+                                  what terms.
+                                </>
+                              ) : (
+                                <>
+                                  {project.overview.keyPoints && project.overview.keyPoints.map((point, index) => (
+                                    <div key={index} className="mb-3 last:mb-0">
+                                      <div className="flex items-start gap-4">
+                                        <div className="w-2 h-2 bg-purple rounded-full flex-shrink-0 mt-2.5"></div>
+                                        <span className="text-card-body text-foreground">{point}</span>
+                                      </div>
+                                    </div>
+                                  ))}
+                                </>
+                              )}
                             </p>
                           </div>
                         </div>
@@ -258,56 +358,401 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                 )}
 
                 {/* The Challenge Section */}
-                <div className="full-width-section bg-blush py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
-                  <div className="max-w-4xl mx-auto px-4">
-                    <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
-                      The Challenge
-                    </h2>
+                {project.challenge && (
+                  <div className="full-width-section bg-blush py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+                    <div className="max-w-4xl mx-auto px-4">
+                      <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
+                        {project.challenge.title}
+                      </h2>
 
-                    <div className="space-y-12 lg:space-y-24">
-                      <p className="text-lg font-work-sans text-foreground leading-relaxed">
-                        Every partner <span className="font-bold">structures their data differently</span>. That means before we can
-                        even check if the policies follow the rules, our team spends hours cleaning,
-                        comparing, and interpreting messy spreadsheets.
-                      </p>
+                      <div className="space-y-12 lg:space-y-24">
+                        <p className="text-lg font-work-sans text-foreground leading-relaxed">
+                          {project.challenge.description}
+                        </p>
 
-                      {/* Challenge card */}
-                      <div className="w-full">
-                        <div className="bg-white border border-stroke rounded-2xl p-8 shadow-sm">
-                          <h3 className="text-card-heading text-purple mb-6">
-                            This makes it difficult to
-                          </h3>
-                          <div className="space-y-4">
-                            <div className="flex items-start gap-4">
-                              <div className="w-2 h-2 bg-purple rounded-full flex-shrink-0 mt-2.5"></div>
-                              <span className="text-card-body text-foreground">Calculate accurate financial positions</span>
-                            </div>
-                            <div className="flex items-start gap-4">
-                              <div className="w-2 h-2 bg-purple rounded-full flex-shrink-0 mt-2.5"></div>
-                              <span className="text-card-body text-foreground">Close the books at the end of each month</span>
-                            </div>
-                            <div className="flex items-start gap-4">
-                              <div className="w-2 h-2 bg-purple rounded-full flex-shrink-0 mt-2.5"></div>
-                              <span className="text-card-body text-foreground">Ensure compliance across partners</span>
+                        {/* Pain Points card */}
+                        {project.challenge.painPoints && (
+                          <div className="w-full">
+                            <div className="bg-white border border-stroke rounded-2xl p-8 shadow-sm">
+                              <h3 className="text-card-heading text-pink mb-6">
+                                Pain Points
+                              </h3>
+                              <div className="space-y-4">
+                                {project.challenge.painPoints.map((painPoint, index) => (
+                                  <div key={index} className="flex items-start gap-4">
+                                    <div className="w-2 h-2 bg-pink rounded-full flex-shrink-0 mt-2.5"></div>
+                                    <div className="text-card-body text-foreground">
+                                      <span className="font-semibold">{painPoint.title}:</span> {painPoint.description}
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
+                        )}
 
-                      {/* Quote */}
-                      <div className="w-full">
-                        <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 md:px-8 lg:px-16 py-8 text-center">
-                          <p className="text-quote text-pink italic max-w-5xl mx-auto">
-                            <span className="text-[1.2em]" dangerouslySetInnerHTML={{ __html: '&ldquo;' }}></span>Our underwriting (UW) team, the people responsible for assessing
-                            and approving insurance risks, needed a <span className="font-bold text-pink">BETTER</span> way to handle this<span className="text-[1.2em]" dangerouslySetInnerHTML={{ __html: '&rdquo;' }}></span>
-                          </p>
+                        {/* Success Metrics card */}
+                        {project.challenge.successMetrics && (
+                          <div className="w-full">
+                            <div className="bg-white border border-stroke rounded-2xl p-8 shadow-sm">
+                              <h3 className="text-card-heading text-blue-600 mb-6">
+                                Success Metrics
+                              </h3>
+                              <div className="space-y-4">
+                                {project.challenge.successMetrics.map((metric, index) => (
+                                  <div key={index} className="flex items-start gap-4">
+                                    <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0 mt-2.5"></div>
+                                    <span className="text-card-body text-foreground">{metric}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Quote - different for each project */}
+                        <div className="w-full">
+                          <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 md:px-8 lg:px-16 py-8 text-center">
+                            <p className={`text-quote ${project.name === "Simplifying Compliance Through Better Data Visibility" ? "text-pink" : "text-blue-600"} italic max-w-5xl mx-auto`}>
+                              <span className="text-[1.2em]" dangerouslySetInnerHTML={{ __html: '&ldquo;' }}></span>
+                              {project.name === "Simplifying Compliance Through Better Data Visibility" ? (
+                                <>Our underwriting (UW) team, the people responsible for assessing
+                                and approving insurance risks, needed a <span className="font-bold text-pink">BETTER</span> way to handle this</>
+                              ) : project.challenge.quote ? (
+                                <>We keep getting emails from customers saying they don't understand what they owe or how to pay. These reminders are <span className="font-bold text-blue-600">confusing</span>, and we end up handling a lot of avoidable support tickets.</>
+                              ) : (
+                                <>Our customers needed a <span className="font-bold text-pink">clearer</span> and more <span className="font-bold text-pink">actionable</span> way to understand their payment obligations</>
+                              )}
+                              <span className="text-[1.2em]" dangerouslySetInnerHTML={{ __html: '&rdquo;' }}></span>
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
 
-                {/* Market Research Section */}
+                {/* Research Section */}
+                {project.research && (
+                  <div className="full-width-section bg-white py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+                    <div className="max-w-4xl mx-auto px-4">
+                      <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
+                        {project.research.title}
+                      </h2>
+
+                      <div className="space-y-16 lg:space-y-20">
+                        <p className="text-lg md:text-[22px] font-work-sans text-foreground leading-relaxed">
+                          {project.research.description}
+                        </p>
+
+                        {/* Email Research Section */}
+                        {project.research.emailResearch && (
+                          <>
+                            {/* Email Research Image 1 */}
+                            <div className="w-full lg:w-screen lg:relative lg:left-1/2 lg:right-1/2 lg:-ml-[50vw] lg:-mr-[50vw] lg:px-[350px]">
+                              <img
+                                src={project.research.emailResearch.images[0]}
+                                alt="Email Research Analysis 1"
+                                className="w-full h-auto"
+                              />
+                            </div>
+
+                            {/* Email Research Image 2 */}
+                            <div className="w-full lg:w-screen lg:relative lg:left-1/2 lg:right-1/2 lg:-ml-[50vw] lg:-mr-[50vw] lg:px-[350px]">
+                              <img
+                                src={project.research.emailResearch.images[1]}
+                                alt="Email Research Analysis 2"
+                                className="w-full h-auto"
+                              />
+                            </div>
+
+                            {/* Key Findings */}
+                            <div className="w-full">
+                              <div className="bg-white border border-stroke rounded-2xl p-8 shadow-sm">
+                                <h3 className="text-card-heading text-blue-600 mb-6">
+                                  Key Findings
+                                </h3>
+                                <div className="space-y-4">
+                                  {project.research.emailResearch.findings.map((finding, index) => (
+                                    <div key={index} className="flex items-start gap-4">
+                                      <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0 mt-2.5"></div>
+                                      <span className="text-card-body text-foreground">{finding}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )}
+
+
+                        {/* UX/UI Audit of Current Email */}
+                        {project.research.uxuiAudit && (
+                          <div className="mb-16">
+                            <h4 className="text-lg font-semibold text-foreground font-sora mb-8">
+                              {project.research.uxuiAudit.title}
+                            </h4>
+
+                            {/* UX/UI Audit Image - same size as email research images */}
+                            <div className="w-full lg:w-screen lg:relative lg:left-1/2 lg:right-1/2 lg:-ml-[50vw] lg:-mr-[50vw] lg:px-[350px]">
+                              <img
+                                src={project.research.uxuiAudit.image}
+                                alt="UX/UI Audit of Current Email"
+                                className="w-full h-auto"
+                              />
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Qualitative Interviews */}
+                        {project.research.qualitativeInterviews && (
+                          <div className="mb-16">
+                            <h4 className="text-lg font-semibold text-foreground font-sora mb-8">
+                              {project.research.qualitativeInterviews.title}
+                            </h4>
+
+                            {/* Individual Interview Cards */}
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                              {project.research.qualitativeInterviews.insights.map((insight, index) => {
+                                const avatarImages = [
+                                  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
+                                  "https://images.unsplash.com/photo-1494790108755-2616b612b64c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
+                                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80"
+                                ];
+                                return (
+                                  <div key={index} className="bg-white border border-gray-200 rounded-2xl p-8 text-center">
+                                    <div className="w-20 h-20 mx-auto mb-6 rounded-full overflow-hidden bg-gray-200">
+                                      <img
+                                        src={avatarImages[index]}
+                                        alt={`${insight.author} portrait`}
+                                        className="w-full h-full object-cover object-center"
+                                      />
+                                    </div>
+                                    <blockquote className="text-gray-700 text-sm leading-relaxed mb-4 italic">
+                                      "{insight.quote}"
+                                    </blockquote>
+                                    <cite className="text-sm text-gray-600 font-medium text-center block">
+                                      - {insight.author}
+                                    </cite>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Key Insights */}
+                        {project.research.keyInsightCards && (
+                          <div className="space-y-8">
+                            {project.research.keyInsightCards.map((insightCard, index) => (
+                              <KeyInsightCard
+                                key={index}
+                                insight={insightCard.insight}
+                                update={insightCard.update}
+                                className="mb-8"
+                              />
+                            ))}
+                          </div>
+                        )}
+
+                        {/* User Journey Map */}
+                        {project.research.userJourney && (
+                          <div className="mb-16">
+                            <h4 className="text-lg font-semibold text-foreground font-sora mb-8">
+                              {project.research.userJourney.title}
+                            </h4>
+
+                            {/* User Journey Map Carousel */}
+                            <div className="mb-6">
+                              <div className="relative max-w-4xl mx-auto">
+                                <div className="relative overflow-hidden rounded-lg">
+                                  <img
+                                    src={`/Case Studies/Boosting Payment Success/Journey map ${currentImageIndex + 1}.png`}
+                                    alt={`User Journey Map ${currentImageIndex + 1}`}
+                                    className="w-full h-auto transition-opacity duration-500"
+                                  />
+                                </div>
+                                {/* Dots indicator */}
+                                <div className="flex justify-center mt-4 space-x-2">
+                                  {[0, 1].map((index) => (
+                                    <button
+                                      key={index}
+                                      onClick={() => setCurrentImageIndex(index)}
+                                      className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+                                        currentImageIndex === index
+                                          ? 'bg-gray-300 hover:bg-gray-400'
+                                          : 'bg-gray-300 hover:bg-gray-400'
+                                      }`}
+                                      style={currentImageIndex === index ? { backgroundColor: '#E36785' } : {}}
+                                    />
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+
+                            <p className="text-muted-foreground leading-relaxed">
+                              {project.research.userJourney.description}
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Impact vs Effort */}
+                        {project.research.impactVsEffort && (
+                          <div className="mb-16">
+                            <h4 className="text-lg font-semibold text-foreground font-sora mb-8">
+                              {project.research.impactVsEffort.title}
+                            </h4>
+
+                            <p className="text-muted-foreground leading-relaxed mb-8">
+                              {project.research.impactVsEffort.description}
+                            </p>
+
+                            <div className="max-w-4xl mx-auto">
+                              <img
+                                src="/Case Studies/Boosting Payment Success/Opportunity areas.jpg"
+                                alt="Impact vs Effort Analysis - Opportunity Areas"
+                                className="w-full h-auto"
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Email Updates Section */}
+                {project.emailUpdates && (
+                  <div className="full-width-section py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]" style={{ backgroundColor: '#ECF1F9' }}>
+                    <div className="max-w-4xl mx-auto px-4">
+                      <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
+                        {project.emailUpdates.title}
+                      </h2>
+
+                      <div className="space-y-16 lg:space-y-20">
+                        <p className="text-lg md:text-[22px] font-work-sans text-foreground leading-relaxed">
+                          {project.emailUpdates.description}
+                        </p>
+
+                        {/* Email Wireframe Image */}
+                        <div className="w-full">
+                          <img
+                            src={project.emailUpdates.image}
+                            alt="Email Updates Wireframe"
+                            className="w-full h-auto"
+                          />
+                        </div>
+
+                        {/* Key Updates Card - same style as Key Findings */}
+                        {project.emailUpdates.keyUpdates && (
+                          <div className="w-full">
+                            <div className="bg-white border border-stroke rounded-2xl p-8 shadow-sm">
+                              <h3 className="text-card-heading text-blue-600 mb-6">
+                                Key updates
+                              </h3>
+                              <div className="space-y-4">
+                                {project.emailUpdates.keyUpdates.insight.map((point, index) => (
+                                  <div key={index} className="flex items-start gap-4">
+                                    <div className="w-2 h-2 bg-blue-600 rounded-full flex-shrink-0 mt-2.5"></div>
+                                    <span className="text-card-body text-foreground">{point}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+
+
+                {/* Impact Summary Section */}
+                {project.impactSummary && (
+                  <div className="full-width-section bg-white py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+                    <div className="max-w-4xl mx-auto px-4">
+                      <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
+                        {project.impactSummary.title}
+                      </h2>
+
+                      <div className="space-y-16 lg:space-y-20">
+                        {/* Description */}
+                        <p className="text-lg md:text-[22px] font-work-sans text-foreground leading-relaxed">
+                          {project.impactSummary.description.split('significantly easier').map((part, index) =>
+                            index === 0 ? part : (
+                              <span key={index}>
+                                <strong>significantly easier</strong>{part}
+                              </span>
+                            )
+                          )}
+                        </p>
+
+                        {/* Number Impact Cards */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                          {project.impactSummary.highlightCards.map((card, index) => (
+                            <NumberImpactCard
+                              key={index}
+                              percentage={card.percentage}
+                              description={card.description}
+                            />
+                          ))}
+                        </div>
+
+                        {/* KPI Table */}
+                        <div className="w-full">
+                          <div className="bg-white border border-riso-blue rounded-2xl p-8 overflow-hidden">
+                            <div className="overflow-x-auto">
+                              <table className="w-full">
+                                <thead>
+                                  <tr className="border-b border-riso-blue">
+                                    <th className="text-left py-4 px-2 text-[20px] font-mono text-riso-blue font-bold">
+                                      KPI
+                                    </th>
+                                    <th className="text-left py-4 px-2 text-[20px] font-mono text-riso-blue font-bold">
+                                      Before
+                                    </th>
+                                    <th className="text-left py-4 px-2 text-[20px] font-mono text-riso-blue font-bold">
+                                      After
+                                    </th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {project.impactSummary.kpiTable.map((row, index) => (
+                                    <tr key={index} className="border-b border-riso-blue last:border-b-0">
+                                      <td className="py-4 px-2 text-base font-work-sans text-foreground">
+                                        {row.kpi}
+                                      </td>
+                                      <td className="py-4 px-2 text-base font-work-sans text-foreground">
+                                        {row.before}
+                                      </td>
+                                      <td className="py-4 px-2 text-base font-work-sans text-foreground">
+                                        {row.after}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Testimonial */}
+                        <div className="text-center space-y-6">
+                          <blockquote className="text-quote text-riso-blue italic max-w-5xl mx-auto">
+                            <span className="text-[1.2em]" dangerouslySetInnerHTML={{ __html: '&ldquo;' }}></span>{project.impactSummary.testimonial.quote}<span className="text-[1.2em]" dangerouslySetInnerHTML={{ __html: '&rdquo;' }}></span>
+                          </blockquote>
+                          <cite className="text-2xl font-work-sans text-riso-blue text-center block">
+                            {project.impactSummary.testimonial.author}
+                          </cite>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+{/* Market Research Section (for Compliance) */}
+                {project.name === "Simplifying Compliance Through Better Data Visibility" && (
                 <div className="py-8 lg:pb-32">
                   <div className="max-w-4xl mx-auto">
                   <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
@@ -369,74 +814,10 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                   </div>
                   </div>
                 </div>
-              </div>
+                )}
 
-              {/* Our Goals Section */}
-              <div className="full-width-section bg-greige py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
-                  <div className="max-w-4xl mx-auto px-4">
-                    <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
-                      Our Goals
-                    </h2>
-
-                    <div className="space-y-16 lg:space-y-20">
-                      <p className="text-lg md:text-[22px] font-work-sans text-foreground leading-relaxed">
-                        Every partner <span className="font-bold">structures their data differently</span>. That means before we can
-                        even check if the policies follow the rules, our team spends hours cleaning,
-                        comparing, and interpreting messy spreadsheets.
-                      </p>
-
-                      {/* Flow Diagram */}
-                      <div className="w-full">
-                        <div className="text-center">
-                          <img
-                            src="/Case Studies/Compliance/case-study-compliance-visuals-diagram-backend.png"
-                            alt="Data flow diagram showing Partner Data -> Back end -> Front end process"
-                            className="w-full max-w-2xl mx-auto h-auto"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Backend Section */}
-                      <div className="space-y-8 mt-16 lg:mt-24">
-                        <h3 className="text-2xl md:text-[32px] font-work-sans font-bold text-purple text-center">
-                          Backend
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <GoalCard
-                            variant="backend"
-                            title="Cleanse and enrich"
-                            description="Automatically detect inconsistencies and suggest actions."
-                          />
-                          <GoalCard
-                            variant="backend"
-                            title="Seamless ingestion"
-                            description="Seamlessly upload BDX files from multiple partners."
-                          />
-                        </div>
-                      </div>
-
-                      {/* UX/UI Section */}
-                      <div className="space-y-8">
-                        <h3 className="text-2xl md:text-[32px] font-work-sans font-bold text-pink text-center">
-                          UX/UI
-                        </h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <GoalCard
-                            variant="ux"
-                            title="Empower users"
-                            description="Provide an intuitive interface so business users (not IT) could handle data review"
-                          />
-                          <GoalCard
-                            variant="ux"
-                            title="Simplifying Complexity"
-                            description="Help underwriters quickly understand and act on compliance data."
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 {/* User Journey Section */}
+                {project.name !== "Boosting Payment Success" && (
                 <div className="full-width-section bg-blush py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
                   <div className="max-w-4xl mx-auto px-4">
                     <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
@@ -521,6 +902,7 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                     </div>
                   </div>
                 </div>
+                )}
 
 
 
@@ -529,6 +911,7 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
 
 
                 {/* Testing & Iteration Section */}
+                {project.name !== "Boosting Payment Success" && (
                 <div className="full-width-section bg-butter py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
                   <div className="max-w-4xl mx-auto px-4">
                     <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
@@ -614,8 +997,10 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                     </div>
                   </div>
                 </div>
+                )}
 
                 {/* Final UI Section */}
+                {project.name !== "Boosting Payment Success" && (
                 <div className="full-width-section bg-white py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
                   <div className="max-w-4xl mx-auto px-4">
                     <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
@@ -676,6 +1061,8 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                     </div>
                   </div>
                 </div>
+                )}
+              </div>
               </>
             ) : (
               <div className="space-y-16 lg:space-y-32">

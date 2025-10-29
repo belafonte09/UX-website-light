@@ -25,16 +25,18 @@ const KeyInsightCard: React.FC<KeyInsightCardProps> = ({
           />
         </div>
 
-        {/* Update section */}
-        <div>
-          <h4 className="text-lg md:text-[22px] font-work-sans text-pink mb-3 md:mb-4">
-            Update
-          </h4>
-          <p
-            className="text-base md:text-[20px] font-work-sans text-foreground leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: update }}
-          />
-        </div>
+        {/* Update section - only show if update content exists */}
+        {update && (
+          <div>
+            <h4 className="text-lg md:text-[22px] font-work-sans text-pink mb-3 md:mb-4">
+              Update
+            </h4>
+            <p
+              className="text-base md:text-[20px] font-work-sans text-foreground leading-relaxed"
+              dangerouslySetInnerHTML={{ __html: update }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

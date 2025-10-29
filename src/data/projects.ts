@@ -111,38 +111,128 @@ export const projects = {
     {
       name: "Boosting Payment Success",
       date: "2024",
-      problem: "Customers attempt to track their dunning information by referring to the dunning letters they receive via email. Consequently, they frequently turn to our Partners or reach out to our OPS Team to seek clarification and answers to their inquiries which eventually create manual work of around 6 hours a week.",
-      projectDetails: {
-        myRole: [
-          "UX Research",
-          "Wireframing",
-          "Prototyping",
-          "Testing",
-          "UI Design"
+      modernLayout: true,
+      overview: {
+        title: "Boosting Payment Success During Dunning",
+        subtitle: "",
+        description: "Our customers were struggling to track their dunning information by referring to the dunning letters they receive via email. Consequently, they frequently turn to our Partners or reach out to our OPS Team to seek clarification and answers to their inquiries which eventually create manual work of around 6 hours a week.",
+        keyPoints: [
+          "Customers attempt to track their dunning information by referring to the dunning letters they receive via email",
+          "They frequently turn to our Partners or reach out to our OPS Team to seek clarification",
+          "This creates manual work of around 6 hours a week for our operations team"
         ],
-        stakeholders: [
-          "Payments Team",
-          "Operations Team",
-          "End Customer"
-        ],
-        methodologies: [
-          "Competitor Research",
-          "Swot Analysis",
-          "User interviews",
-          "User Journey Mapping",
-          "Wireframing",
-          "Prototyping"
-        ],
-        tools: [
-          "Figma",
-          "Miro"
-        ],
-        duration: [
-          "2 Weeks User Research",
-          "4 Weeks Design & implementation"
+        challenges: [
+          "Reduce customer confusion about payment requirements",
+          "Increase first-time payment completion rates",
+          "Decrease operational overhead from customer inquiries",
+          "Improve overall customer satisfaction with payment process"
         ]
       },
-      solution: "By improving the clarity and usability of the dunning email and customer portal, we aimed to increase payment completion from the first dunning email by 50% and reduce customer queries to the Operations team by improving self-service options.",
+      challenge: {
+        title: "The Challenge",
+        description: "Design a dunning communication experience that helps customers understand their payment status and take action quickly.",
+        successMetrics: [
+          "Increase on-time payments",
+          "Reduction in support tickets related to billing confusion",
+          "Higher click-through rate on \"Pay Now\" buttons"
+        ],
+        quote: "We keep getting emails from customers saying they don't understand what they owe or how to pay. These reminders are confusing, and we end up handling a lot of avoidable support tickets."
+      },
+      research: {
+        title: "Research",
+        description: "Looking at multiple dunning letters from big companies, I collected recurring design patterns.",
+        emailResearch: {
+          findings: [
+            "Clear subject",
+            "Prominent, easy, friendly tone",
+            "Payment methods visible",
+            "Amount due, clear, big",
+            "Due date visible",
+            "Big CTA with clear action"
+          ],
+          images: [
+            "/images/Featured Projects/boosting payment success/Email Research 1.png",
+            "/images/Featured Projects/boosting payment success/Email Research 2.png"
+          ]
+        },
+        uxuiAudit: {
+          title: "UX/UI Audit of Current Email",
+          findings: [
+            "Low contrast",
+            "Generic corporate",
+            "No visuals regarding the product",
+            "No clear due date",
+            "Users struggle to know who to pay again",
+            "IBAN, Payment details not clearly distinct",
+            "Missing clear CTA to Action"
+          ],
+          image: "/images/Featured Projects/boosting payment success/Email Audit 3.png"
+        },
+        qualitativeInterviews: {
+          title: "Qualitative Interviews",
+          insights: [
+            {
+              quote: "I did not know you could scan the invoice.",
+              author: "Marcus Chen"
+            },
+            {
+              quote: "With insurance it is very important to be informed about non-payment because my coverage is at stake.",
+              author: "Sarah Rodriguez"
+            },
+            {
+              quote: "I forgot about it, until I received the dunning letter.",
+              author: "David Thompson"
+            }
+          ]
+        },
+        keyInsightCards: [
+          {
+            insight: "Users value <strong>convenience and accessibility</strong> when receiving notifications. They prefer channels like email or in-app messages that allow them to read and respond directly from their phones.",
+            update: ""
+          },
+          {
+            insight: "Users expect payment details, such as the amount due and due date, to be immediately <strong>visible and easy to find</strong>. When this information isn't clear, they revert to email or the customer portal, and if that fails, they contact customer support, increasing manual workload and frustration.",
+            update: ""
+          }
+        ],
+        userJourney: {
+          title: "User Journey Map",
+          description: "Comprehensive mapping of the customer payment journey from notification to completion"
+        },
+        impactVsEffort: {
+          title: "Impact vs Effort",
+          description: "Based on insights from user interviews, the journey map, and feedback from our Customer Service team, we identified the key pain points and opportunities with the highest potential impact."
+        }
+      },
+      emailUpdates: {
+        title: "Email updates",
+        description: "Our first step was to see if existing software could solve this for us. We explored several compliance and data-validation tools available in the insurance industry.",
+        image: "/images/Featured Projects/boosting payment success/Email recommendations 1.png",
+        keyUpdates: {
+          insight: [
+            "Clear Call to Action",
+            "Product overview",
+            "Deadline highlighted in red"
+          ],
+          update: ""
+        }
+      },
+      impactSummary: {
+        title: "Impact",
+        description: "By implementing the design changes to the emails being sent out to customers, we made it significantly easier for the customer to find the information that they needed to complete the payment.",
+        highlightCards: [
+          { percentage: "70%", description: "REDUCTION IN PROCESS TIME" },
+          { percentage: "80%", description: "MORE ACCURACY" }
+        ],
+        kpiTable: [
+          { kpi: "Manual overhead/tickets", before: "6 h/week", after: "2 h/week" },
+          { kpi: "No of Tickets", before: "average 30", after: "average 10" }
+        ],
+        testimonial: {
+          quote: "The redesigned dunning emails have significantly reduced customer confusion and support volume. Payment-related inquiries are now much easier to manage, and customers are completing payments more efficiently.",
+          author: "Operations Team Lead"
+        }
+      },
       impact: [
         { metric: "Payment completion rate (first dunning email)", before: "18%", after: "56%", description: "Significantly reducing manual follow-ups and operational overhead" },
         { metric: "Customer queries related to payments", before: "1,200/mo", after: "840/mo", description: "Significantly reduced email queries to the operation team" }

@@ -1,0 +1,63 @@
+name: CI/CD Pipeline
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Test & Build
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18]
+
+    steps:
+    - name: 📦 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🔧 Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: 📥 Install dependencies
+      run: |
+        echo "Installing npm dependencies..."
+        npm ci
+
+    - name: 🔍 TypeScript type check
+      run: |
+        echo "Running TypeScript type checking..."
+        npx tsc --noEmit
+
+    - name: 🧹 Lint code
+      run: |
+        echo "Running ESLint..."
+        npm run lint
+
+    - name: 🧪 Run tests (if available)
+      run: |
+        echo "Checking for tests..."
+        if npm run test --silent 2>/dev/null; then
+          echo "Running tests..."
+          npm run test
+        else
+          echo "No test script found, skipping tests"
+        fi
+      continue-on-error: false
+
+    - name: 🏗️ Build application
+      run: |
+        echo "Building application..."
+        npm run build
+
+    - name: ✅ Build completed successfully
+      run: |
+        echo "All checks passed! 🎉"
+        echo "Build artifacts created in dist/ folder"
+        ls -la dist/

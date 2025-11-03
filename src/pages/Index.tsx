@@ -258,6 +258,15 @@ const FactCardLives = () => {
   );
 };
 
+interface Shape {
+  id: string;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+}
+
 const Index = () => {
   const [showMoreProjects, setShowMoreProjects] = useState(false);
 
@@ -294,7 +303,7 @@ const Index = () => {
     };
     window.addEventListener('resize', updateHeroRect);
 
-    const checkCollision = (shape1: any, shape2: any) => {
+    const checkCollision = (shape1: Shape, shape2: Shape) => {
       // Convert normalized positions to Hero section pixel coordinates
       const x1 = shape1.x * heroRect.width;
       const y1 = shape1.y * heroRect.height;
@@ -307,7 +316,7 @@ const Index = () => {
       return distance < (shape1.size + shape2.size);
     };
 
-    const resolveCollision = (shape1: any, shape2: any) => {
+    const resolveCollision = (shape1: Shape, shape2: Shape) => {
       const x1 = shape1.x * heroRect.width;
       const y1 = shape1.y * heroRect.height;
       const x2 = shape2.x * heroRect.width;

@@ -3,6 +3,7 @@ export const projects = {
     {
       name: "How we used AI to simplify Rule Creation",
       date: "2025",
+      modernLayout: true,
       problem: "As our business model shifts to a Managing General Agent, our task is to validate Partner data against a set of rules and address any violations efficiently. Creating and managing business rules was complex and time-consuming for non-technical users, requiring extensive documentation and IT support.",
       challenges: [
         "Rules are stored in two separate systems, with no automatic cross-check or synchronization for updates.",

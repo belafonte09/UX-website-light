@@ -11,6 +11,14 @@ import KeyInsightCard from '@/components/KeyInsightCard';
 import NumberImpactCard from '@/components/NumberImpactCard';
 import GoalCard from '@/components/GoalCard';
 import ImpactCard from '@/components/ImpactCard';
+import AIOverviewSection from '@/components/AIOverviewSection';
+import AIChallengeSection from '@/components/AIChallengeSection';
+import AIMarketResearchSection from '@/components/AIMarketResearchSection';
+import AIIdeationSection from '@/components/AIIdeationSection';
+import AIWireframesSection from '@/components/AIWireframesSection';
+import AIUsabilityTestingSection from '@/components/AIUsabilityTestingSection';
+import AIFinalUISection from '@/components/AIFinalUISection';
+import AIImpactSection from '@/components/AIImpactSection';
 
 interface ProjectDetailProps {
   projects: {
@@ -281,6 +289,18 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
               <div className="text-center py-20">
                 <h2 className="text-2xl font-semibold text-foreground mb-4">Coming soon!</h2>
                 <p className="text-muted-foreground">This case study is currently in development. Check back soon for more details!</p>
+              </div>
+            ) : project.name === "How we used AI to simplify Rule Creation" ? (
+              //  AI Project Sections - Modern Layout
+              <div className="space-y-16 lg:space-y-32 -mx-4 md:-mx-16 lg:-mx-24 xl:-mx-32">
+                <AIOverviewSection />
+                <AIChallengeSection />
+                <AIMarketResearchSection />
+                <AIIdeationSection />
+                <AIWireframesSection />
+                <AIUsabilityTestingSection />
+                <AIFinalUISection onAnyInteraction={hidePrototypePrompt} />
+                <AIImpactSection />
               </div>
             ) : project.modernLayout ? (
               // Modern Layout for Data Visualization Platform
@@ -1063,7 +1083,7 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                 </div>
                 )}
               </div>
-              </>
+            </>
             ) : (
               <div className="space-y-16 lg:space-y-32">
                 <div>

@@ -52,6 +52,7 @@ export const projects = {
     {
       name: "How We Fixed our Design-Dev Communication Gap",
       date: "2024",
+      comingSoon: true,
       problem: "Our Company strategy shifted → my role changed to sole UX/UI designer in one team. Through observation and a Spotify health check our team identified that the Design-to-Developer process was unclear. Result: confusion, lack of communication, and misaligned outputs.",
       workshop: {
         title: "Workshop",

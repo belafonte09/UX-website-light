@@ -2,7 +2,7 @@ import React from 'react';
 
 const AIMarketResearchSection: React.FC = () => {
   return (
-    <div className="full-width-section py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]" style={{ backgroundColor: '#FAF9EF' }}>
+    <div className="full-width-section py-8 lg:pt-32 lg:pb-32 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]" style={{ backgroundColor: '#E4E3DD' }}>
       <div className="max-w-4xl mx-auto px-4">
         <h2 className="text-3xl font-sora font-bold text-foreground mb-12 lg:mb-24">
           Market Research

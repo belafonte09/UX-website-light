@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prototype Static Mockup</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .macbook-container {
+            perspective: 1500px;
+            transform-style: preserve-3d;
+        }
+
+        .macbook {
+            width: 1000px;
+            height: 625px;
+            background: linear-gradient(145deg, #e8e8e8, #f5f5f5);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow:
+                0 30px 60px rgba(0,0,0,0.15),
+                0 12px 24px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transform: rotateX(8deg) rotateY(-8deg);
+            position: relative;
+        }
+
+        .macbook::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: linear-gradient(145deg, #d0d0d0, #e8e8e8);
+            border-radius: 18px;
+            z-index: -1;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 0 4px #333;
+        }
+
+        .browser {
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .browser-header {
+            height: 50px;
+            background: #e9ecef;
+            border-bottom: 1px solid #dee2e6;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 10px;
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f57; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #28ca42; }
+
+        .address-bar {
+            flex: 1;
+            margin-left: 25px;
+            height: 30px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0 15px;
+            font-size: 14px;
+            color: #666;
+            display: flex;
+            align-items: center;
+        }
+
+        .prototype-content {
+            flex: 1;
+            background: #f5f5f5;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            background: #F3F5F7;
+            border-right: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+        }
+
+        .sidebar-header {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            width: 100%;
+            height: 40px;
+            background: #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 15px;
+        }
+
+        .nav-item {
+            padding: 8px 10px;
+            margin-bottom: 4px;
+            border-radius: 4px;
+            color: #374151;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-item.active {
+            background: rgba(2, 71, 81, 0.1);
+            color: #024751;
+            font-weight: 500;
+        }
+
+        .nav-item:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .sidebar-bottom {
+            border-top: 1px solid #e5e7eb;
+            padding: 15px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-avatar {
+            width: 24px;
+            height: 24px;
+            background: #ec4899;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 25px;
+            overflow-y: auto;
+            max-height: 100%;
+        }
+
+        .content-header {
+            margin-bottom: 20px;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 25px;
+        }
+
+        .tab {
+            padding: 8px 0;
+            margin-right: 30px;
+            border-bottom: 2px solid transparent;
+            font-size: 14px;
+            color: #6b7280;
+            cursor: pointer;
+        }
+
+        .tab.active {
+            color: #024751;
+            border-bottom-color: #024751;
+            font-weight: 500;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .valgtp-card {
+            margin-bottom: 25px;
+        }
+
+        .rules-card {
+            margin-bottom: 25px;
+        }
+
+        .rule-item {
+            background: #F3F5F7;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .rule-condition {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .condition-text {
+            background: #f3f4f6;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #374151;
+        }
+
+        .rule-description {
+            background: #f9fafb;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #374151;
+        }
+
+        .test-run-card {
+            margin-bottom: 25px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #F3F5F7;
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: #374151;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        td {
+            padding: 8px 12px;
+            font-size: 12px;
+            color: #374151;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .scroll-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(transparent, rgba(248,249,250,0.9));
+            pointer-events: none;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            right: 8px;
+            top: 60%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 80px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 3px;
+            z-index: 5;
+        }
+
+        .scroll-thumb {
+            width: 100%;
+            height: 35px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 3px;
+            margin-top: 15px;
+        }
+
+        .macbook-logo {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(145deg, #c0c0c0, #e0e0e0);
+            border-radius: 50%;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .reflection {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                transparent 0%,
+                rgba(255,255,255,0.08) 30%,
+                rgba(255,255,255,0.15) 50%,
+                rgba(255,255,255,0.08) 70%,
+                transparent 100%
+            );
+            pointer-events: none;
+            z-index: 15;
+        }
+    </style>
+</head>
+<body>
+    <div class="macbook-container">
+        <div class="macbook">
+            <div class="screen">
+                <div class="browser">
+                    <div class="browser-header">
+                        <div class="browser-dots">
+                            <div class="dot red"></div>
+                            <div class="dot yellow"></div>
+                            <div class="dot green"></div>
+                        </div>
+                        <div class="address-bar">localhost:5173/projects/how-we-used-ai-to-simplify-rule-creation</div>
+                    </div>
+                    <div class="prototype-content">
+                        <!-- Sidebar -->
+                        <div class="sidebar">
+                            <div class="sidebar-header">
+                                <div class="logo">MGA System</div>
+                            </div>
+                            <div class="sidebar-nav">
+                                <div class="nav-item">
+                                    <span>👥</span>
+                                    <span>Partners</span>
+                                </div>
+                                <div class="nav-item active">
+                                    <span>📁</span>
+                                    <span>Master templates</span>
+                                </div>
+                                <div class="nav-item">
+                                    <span>📋</span>
+                                    <span>Mapping lists</span>
+                                </div>
+                                <div class="nav-item">
+                                    <span>🗃️</span>
+                                    <span>BDX Files</span>
+                                </div>
+                            </div>
+                            <div class="sidebar-bottom">
+                                <div class="nav-item">
+                                    <span>🔧</span>
+                                    <span>Settings</span>
+                                </div>
+                                <div class="user-profile">
+                                    <div class="user-avatar">K</div>
+                                    <span>Karin Hoffmann</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content -->
+                        <div class="main-content">
+                            <div class="content-header">
+                                <div class="page-title">Pet Insurance Template</div>
+                            </div>
+
+                            <div class="tabs">
+                                <div class="tab">Select fields</div>
+                                <div class="tab active">Validation rules</div>
+                            </div>
+
+                            <!-- ValGTP Card -->
+                            <div class="card valgtp-card">
+                                <div class="card-header">
+                                    <span>🔽 ValGTP</span>
+                                </div>
+                                <div class="card-content">
+                                    <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 15px; margin-bottom: 15px;">
+                                        <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">Describe the validation rule in plain language:</div>
+                                        <div style="background: white; border: 1px solid #d1d5db; border-radius: 4px; padding: 8px; margin-bottom: 10px; font-size: 13px;">If the pet is older than 10 years, mixed breed must be false</div>
+                                        <button style="background: #024751; color: white; border: none; padding: 8px 16px; border-radius: 4px; font-size: 12px;">Generate rule</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Validation Rules Card -->
+                            <div class="card rules-card">
+                                <div class="card-header">
+                                    <span>🔽 Validation rules</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="rule-item">
+                                        <div class="rule-condition">
+                                            <span style="font-weight: 500;">IF</span>
+                                            <span class="condition-text">product_variant = "Basic"</span>
+                                            <span style="font-weight: 500;">THEN</span>
+                                        </div>
+                                        <div class="rule-description">IF product_variant = "Basic" THEN coverage_sum_overall < 10000</div>
+                                    </div>
+
+                                    <div class="rule-item">
+                                        <div class="rule-condition">
+                                            <span style="font-weight: 500;">IF</span>
+                                            <span class="condition-text">DURATION(...)</span>
+                                            <span style="font-weight: 500;">THEN</span>
+                                        </div>
+                                        <div class="rule-description">DURATION("birth_date_pet","reporting_date","year") > 10 THEN mixed_breed = FALSE</div>
+                                    </div>
+
+                                    <div class="rule-item">
+                                        <div class="rule-condition">
+                                            <span style="font-weight: 500;">IF</span>
+                                            <span class="condition-text">EXISTS(...)</span>
+                                            <span style="font-weight: 500;">THEN</span>
+                                        </div>
+                                        <div class="rule-description">EXISTS(last_name)</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Test Run Card -->
+                            <div class="card test-run-card">
+                                <div class="card-header">
+                                    <span>🔽 Test Run</span>
+                                </div>
+                                <div class="card-content">
+                                    <div style="margin-bottom: 15px;">
+                                        <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">Upload BDX Template</div>
+                                        <button style="border: 1px solid #d1d5db; background: white; padding: 6px 12px; border-radius: 4px; font-size: 12px; margin-bottom: 8px;">📁 Upload files...</button>
+                                        <div style="background: #f9fafb; border: 1px solid #e5e7eb; padding: 8px; border-radius: 4px; font-size: 12px; display: flex; align-items: center; gap: 6px;">
+                                            <span>📄</span>
+                                            <span>Demo_sdit_example.csv</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-container">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Errors</th>
+                                                    <th>reporting_date</th>
+                                                    <th>product_variant</th>
+                                                    <th>coverage_sum_overall</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="background: #e9f2ec;">
+                                                    <td>1</td>
+                                                    <td>#</td>
+                                                    <td>2024-01-01</td>
+                                                    <td>Basic</td>
+                                                    <td>2000</td>
+                                                </tr>
+                                                <tr style="background: #fdeae8;">
+                                                    <td>2</td>
+                                                    <td>1</td>
+                                                    <td>2024-01-01</td>
+                                                    <td>Basic</td>
+                                                    <td>3000</td>
+                                                </tr>
+                                                <tr style="background: #fdeae8;">
+                                                    <td>3</td>
+                                                    <td>2</td>
+                                                    <td>2024-01-01</td>
+                                                    <td>null = false</td>
+                                                    <td>100000.0 = 100000.0</td>
+                                                </tr>
+                                                <tr style="background: #e9f2ec;">
+                                                    <td>4</td>
+                                                    <td>3</td>
+                                                    <td>2024-01-01</td>
+                                                    <td>Basic</td>
+                                                    <td>3000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="scroll-fade"></div>
+                        <div class="scroll-indicator">
+                            <div class="scroll-thumb"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="reflection"></div>
+            </div>
+            <div class="macbook-logo"></div>
+        </div>
+    </div>
+</body>
+</html>

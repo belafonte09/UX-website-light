@@ -1,4 +1,4 @@
-import { ArrowLeft, Check } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
@@ -19,6 +19,7 @@ import AIWireframesSection from '@/components/AIWireframesSection';
 import AIUsabilityTestingSection from '@/components/AIUsabilityTestingSection';
 import AIFinalUISection from '@/components/AIFinalUISection';
 import AIImpactSection from '@/components/AIImpactSection';
+import ProjectNavigation from '@/components/ProjectNavigation';
 
 interface ProjectDetailProps {
   projects: {
@@ -266,42 +267,40 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-auto">
-      <div className="px-4 md:px-16 lg:px-24 xl:px-32 pt-8 pb-24">
-        <div className="max-w-4xl mx-auto">
-          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-riso-fuschia transition-colors duration-300 mb-12">
-            <ArrowLeft className="w-8 h-8" />
-            Back to Home
-          </Link>
+      {/* Navigation Header */}
+      <ProjectNavigation />
 
-          <div className="space-y-8">
-            {!project.modernLayout && (
-              <div>
-                <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2 font-sora">
-                  {project.name}
-                </h1>
-                {project.date && (
-                  <p className="text-muted-foreground text-lg mb-6">{project.date}</p>
-                )}
-              </div>
-            )}
+      {/* AI Project - Full Width Layout */}
+      {project.name === "How we used AI to simplify Rule Creation" ? (
+        <div className="space-y-16 lg:space-y-32">
+          <AIOverviewSection />
+          <AIChallengeSection />
+          <AIMarketResearchSection />
+          <AIIdeationSection />
+          <AIWireframesSection />
+          <AIUsabilityTestingSection />
+          <AIFinalUISection onAnyInteraction={hidePrototypePrompt} />
+          <AIImpactSection />
+        </div>
+      ) : (
+        <div className="px-4 md:px-16 lg:px-24 xl:px-32 pt-24 pb-24">
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-8">
+              {!project.modernLayout && (
+                <div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2 font-sora">
+                    {project.name}
+                  </h1>
+                  {project.date && (
+                    <p className="text-muted-foreground text-lg mb-6">{project.date}</p>
+                  )}
+                </div>
+              )}
 
-            {project.comingSoon ? (
-              <div className="text-center py-20">
-                <h2 className="text-2xl font-semibold text-foreground mb-4">Coming soon!</h2>
-                <p className="text-muted-foreground">This case study is currently in development. Check back soon for more details!</p>
-              </div>
-            ) : project.name === "How we used AI to simplify Rule Creation" ? (
-              //  AI Project Sections - Modern Layout
-              <div className="space-y-16 lg:space-y-32 -mx-4 md:-mx-16 lg:-mx-24 xl:-mx-32">
-                <AIOverviewSection />
-                <AIChallengeSection />
-                <AIMarketResearchSection />
-                <AIIdeationSection />
-                <AIWireframesSection />
-                <AIUsabilityTestingSection />
-                <AIFinalUISection onAnyInteraction={hidePrototypePrompt} />
-                <AIImpactSection />
-              </div>
+              {project.comingSoon ? (
+                <div className="text-center py-20">
+                  <h2 className="text-2xl font-semibold text-foreground mb-4">Work in progress, check in soon.</h2>
+                </div>
             ) : project.modernLayout ? (
               // Modern Layout for Data Visualization Platform
               <>
@@ -1768,7 +1767,8 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
             )}
           </div>
         </div>
-      </div>
+        </div>
+      )}
     </div>
   );
 };

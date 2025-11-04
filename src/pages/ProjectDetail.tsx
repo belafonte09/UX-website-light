@@ -347,6 +347,8 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                             <h3 className="text-card-heading text-purple mb-6">
                               {project.name === "Simplifying Compliance Through Better Data Visibility"
                                 ? "What is a BDX file?"
+                                : project.name === "Boosting Payment Success"
+                                ? "User Painpoints"
                                 : "Key Challenge"}
                             </h3>
                             <p className="text-card-body text-foreground leading-relaxed">
@@ -535,7 +537,7 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                               {project.research.qualitativeInterviews.insights.map((insight, index) => {
                                 const avatarImages = [
                                   "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
-                                  "https://images.unsplash.com/photo-1494790108755-2616b612b64c?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80",
+                                  "/Case Studies/Boosting Payment Success/jonathan-borba-n1B6ftPB5Eg-unsplash.jpg",
                                   "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400&q=80"
                                 ];
                                 return (
@@ -545,6 +547,7 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                                         src={avatarImages[index]}
                                         alt={`${insight.author} portrait`}
                                         className="w-full h-full object-cover object-center"
+                                        style={index === 1 ? { objectPosition: 'center 30%' } : undefined}
                                       />
                                     </div>
                                     <blockquote className="text-gray-700 text-sm leading-relaxed mb-4 italic">
@@ -1289,9 +1292,10 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                               <div className="text-center">
                                 <div className="w-28 h-28 mx-auto mb-4 rounded-full overflow-hidden bg-gray-200">
                                   <img
-                                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&h=400&q=80"
-                                    alt="User portrait"
+                                    src="/Case Studies/Boosting Payment Success/jonathan-borba-n1B6ftPB5Eg-unsplash.jpg"
+                                    alt="Sarah Rodriguez portrait"
                                     className="w-full h-full object-cover object-center"
+                                    style={{ objectPosition: 'center 30%' }}
                                   />
                                 </div>
                                 <blockquote className="text-muted-foreground text-base leading-relaxed mb-4 italic">
@@ -1330,7 +1334,7 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
 
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Insight Card 1 */}
-                                <div className="bg-gray-200 rounded-lg p-8 min-h-[200px]">
+                                <div className="bg-white border border-stroke rounded-lg p-8 min-h-[200px]">
                                   <div className="flex items-start gap-3">
                                     <div className="flex-shrink-0 mt-1">
                                       <Check className="w-5 h-5 text-teal-500" strokeWidth={3} />
@@ -1342,7 +1346,7 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                                 </div>
 
                                 {/* Insight Card 2 */}
-                                <div className="bg-gray-200 rounded-lg p-8 min-h-[200px]">
+                                <div className="bg-white border border-stroke rounded-lg p-8 min-h-[200px]">
                                   <div className="flex items-start gap-3">
                                     <div className="flex-shrink-0 mt-1">
                                       <Check className="w-5 h-5 text-teal-500" strokeWidth={3} />

@@ -413,6 +413,156 @@ a:focus, a:active, a:hover {
     }
   }
 
+  /* Footer Shape Personality Animations */
+
+  /* Spin - Dizzy 360° rotation for "M" */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Wobble - Jello elastic effect for "U" */
+  @keyframes wobble {
+    0%, 100% {
+      transform: translateX(0) rotate(0deg);
+    }
+    25% {
+      transform: translateX(-5px) rotate(-5deg);
+    }
+    50% {
+      transform: translateX(5px) rotate(5deg);
+    }
+    75% {
+      transform: translateX(-3px) rotate(-3deg);
+    }
+  }
+
+  /* Drift - Graceful side-to-side sway for Teardrop */
+  @keyframes drift {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(15px);
+    }
+  }
+
+  /* Tilt - Curious tilting motion for Square */
+  @keyframes tilt {
+    0%, 100% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+  }
+
+  /* Shake - Nervous rapid shake for Triangle */
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-3px);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(3px);
+    }
+  }
+
+  /* Footer Shape Animation Classes with Play State Control */
+  .footer-shape {
+    transition: transform 0.7s ease-out;
+  }
+
+  .footer-shape-float {
+    animation: fact-float 2s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-float:hover {
+    animation-play-state: running;
+  }
+
+  .footer-shape-wiggle {
+    animation: fact-wiggle 0.5s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-wiggle:hover {
+    animation-play-state: running;
+  }
+
+  .footer-shape-spin {
+    animation: spin 1s linear infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-spin:hover {
+    animation-play-state: running;
+  }
+
+  .footer-shape-bounce {
+    animation: bounce 0.6s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-bounce:hover {
+    animation-play-state: running;
+  }
+
+  .footer-shape-rotate {
+    animation: shape-rotate 3s linear infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-rotate:hover {
+    animation-play-state: running;
+  }
+
+  .footer-shape-wobble {
+    animation: wobble 0.8s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-wobble:hover {
+    animation-play-state: running;
+  }
+
+  .footer-shape-drift {
+    animation: drift 2s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-drift:hover {
+    animation-play-state: running;
+  }
+
+  .footer-shape-tilt {
+    animation: tilt 1s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-tilt:hover {
+    animation-play-state: running;
+  }
+
+  .footer-shape-shake {
+    animation: shake 0.3s ease-in-out infinite;
+    animation-play-state: paused;
+  }
+
+  .footer-shape-shake:hover {
+    animation-play-state: running;
+  }
+
   /* Static Blob Classes */
   .blob-photo {
     z-index: 10;

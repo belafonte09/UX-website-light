@@ -28,8 +28,8 @@ const AIImpactSection: React.FC = () => {
             />
           </div>
 
-          {/* KPI Table Visual - Column overflow */}
-          <div className="w-full lg:w-screen lg:relative lg:left-1/2 lg:right-1/2 lg:-ml-[50vw] lg:-mr-[50vw] lg:px-[350px]">
+          {/* KPI Table Visual */}
+          <div className="w-full">
             <img
               src="/Case Studies/ai project/Ai - KPI Table.png"
               alt="KPI comparison table showing before and after metrics"

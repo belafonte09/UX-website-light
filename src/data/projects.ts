@@ -119,9 +119,9 @@ export const projects = {
         subtitle: "",
         description: "Our customers were struggling to track their dunning information by referring to the dunning letters they receive via email. Consequently, they frequently turn to our Partners or reach out to our OPS Team to seek clarification and answers to their inquiries which eventually create manual work of around 6 hours a week.",
         keyPoints: [
-          "Customers attempt to track their dunning information by referring to the dunning letters they receive via email",
-          "They frequently turn to our Partners or reach out to our OPS Team to seek clarification",
-          "This creates manual work of around 6 hours a week for our operations team"
+          "Poor visibility of key information like due date, amount due and bank details",
+          "Lack of transparency about payment status",
+          "Unclear next steps: Emails lack a clear call-to-action"
         ],
         challenges: [
           "Reduce customer confusion about payment requirements",
@@ -208,7 +208,7 @@ export const projects = {
       },
       emailUpdates: {
         title: "Email updates",
-        description: "Our first step was to see if existing software could solve this for us. We explored several compliance and data-validation tools available in the insurance industry.",
+        description: "Leveraging insights from both users and internal stakeholders, I created an email design that streamlines the payment journey and makes next steps clear and effortless.",
         image: "/images/Featured Projects/boosting payment success/Email recommendations 1.png",
         keyUpdates: {
           insight: [
@@ -228,7 +228,7 @@ export const projects = {
         ],
         kpiTable: [
           { kpi: "Manual overhead/tickets", before: "6 h/week", after: "2 h/week" },
-          { kpi: "No of Tickets", before: "average 30", after: "average 10" }
+          { kpi: "Number of tickets", before: "average 30", after: "average 10" }
         ],
         testimonial: {
           quote: "The redesigned dunning emails have significantly reduced customer confusion and support volume. Payment-related inquiries are now much easier to manage, and customers are completing payments more efficiently.",

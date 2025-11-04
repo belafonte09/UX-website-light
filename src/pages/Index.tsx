@@ -702,7 +702,7 @@ const Index = () => {
       </nav>
 
       {/* Content Cards */}
-      <div className="mx-auto px-2 md:px-8 lg:px-[380px] pt-0 pb-32 space-y-4 bg-greige">
+      <div className="mx-auto px-2 md:px-8 lg:px-[380px] pt-0 pb-96 space-y-4 bg-greige">
 
         {/* Selected Projects Card */}
         <div id="projects" className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-16 md:pb-[72px] md:pr-16 text-text">
@@ -787,9 +787,9 @@ const Index = () => {
 
         {/* Card 2: Who is Karin? */}
         <div className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-16 md:pb-[72px] md:pr-16 text-text">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-6">Who is Karin?</h1>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-12">Who is Karin?</h1>
 
-          <p className="text-heading-4 text-text mb-6">
+          <p className="text-3xl text-text mb-6">
             I'm a versatile designer skilled in research, prototyping, and testing. I collaborate across teams and help make UX a core part of product culture.
           </p>
 
@@ -800,11 +800,11 @@ const Index = () => {
             </p>
 
             <p className="text-text">
-              I turn <strong>complexity into clarity</strong>—whether researching user behavior, running <strong>usability tests</strong>, designing for launches, or leading <strong>design sprints</strong>. My biggest impact: <strong>embedding UX into product culture</strong> so teams think design-first and build better solutions.
+              I turn <strong>complexity into clarity</strong>—whether researching user behavior, running <strong>usability tests</strong>, designing for launches, or leading <strong>design sprints</strong>. My biggest impact: <strong>embedding UX into product culture</strong> so teams think user-experience-first to build useful solutions.
             </p>
 
             <div className="mt-8">
-              <h3 className="text-heading-4 text-text mb-3">What's next?</h3>
+              <h3 className="text-heading-4 font-bold text-text mb-3">What's next?</h3>
               <p className="text-text">
                 I'd love to bring that same energy to your team—as a hands-on designer and advocate for great UX.
               </p>
@@ -877,6 +877,14 @@ const Index = () => {
 
       </div>
     </main>
+
+    {/* Attribution */}
+    <div className="bg-greige text-center py-8">
+      <p className="text-sm text-text/60">
+        Designed with curiosity using Claude Code, React and Figma.
+      </p>
+    </div>
+
     <Footer />
     </>
   );

@@ -993,8 +993,9 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
 
                       {/* Key Insight Card 3 */}
                       <KeyInsightCard
-                        insight='Compliance officers needed <strong>quick filtering</strong> capabilities to focus on high-priority violations during time-sensitive reviews.'
-                        update='I implemented smart filters with severity levels and priority tags, plus a quick-access toolbar for the most common filter combinations.'
+                        insight='Underwriters needed the ability to quickly identify and focus on high-priority violations during time-sensitive reviews.'
+                        update='I added a new column that generates a “Warning” flag for policy violations requiring immediate attention.'
+                        next iteration='Prioritize these warnings based on risk level from high to low.'
                       />
 
                       {/* Key Insight Image 3 */}

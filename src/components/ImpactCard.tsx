@@ -4,11 +4,13 @@ import { Clock, Zap, Gem, Users } from 'lucide-react';
 interface ImpactCardProps {
   variant: 'reduced-work' | 'faster-close' | 'data-accuracy' | 'empowered-users';
   className?: string;
+  bgColor?: string;
 }
 
 const ImpactCard: React.FC<ImpactCardProps> = ({
   variant,
-  className = ''
+  className = '',
+  bgColor = 'bg-butter'
 }) => {
   const getCardContent = () => {
     switch (variant) {
@@ -49,7 +51,7 @@ const ImpactCard: React.FC<ImpactCardProps> = ({
 
   return (
     <div
-      className={`bg-butter border border-pink rounded-2xl p-6 ${className}`}
+      className={`${bgColor} border border-pink rounded-2xl p-6 ${className}`}
     >
       <div className="space-y-4">
         {/* Icon */}

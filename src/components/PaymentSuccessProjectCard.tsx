@@ -15,7 +15,7 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
       onClick={onClick}
     >
       {/* Image Container with horizontal padding */}
-      <div className="w-full px-6 md:px-20 lg:px-[148px]">
+      <div className="w-full px-0 md:px-20 lg:px-[148px]">
         <div className="relative bg-butter rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
           {/* Base project image */}
           <img
@@ -45,7 +45,7 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
               <div>
                 {/* Title */}
                 <h3 className="payment-success-text text-[26px] font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
-                  Boosting payment success
+                Designing an email experience that drives faster, easier customer payment
                 </h3>
 
                 {/* Year */}

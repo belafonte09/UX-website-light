@@ -10,8 +10,7 @@ const AIChallengeSection: React.FC = () => {
 
         <div className="space-y-12 lg:space-y-24">
           <p className="text-lg font-work-sans text-foreground leading-relaxed">
-            Design a dunning communication experience that helps customers
-            understand their payment status and take action quickly.
+            The product challenge was clear: how might we make complex rule logic feel effortless for underwriters, keeping in mind the technical constraints of our backend?
           </p>
 
           {/* Our setup was not helping us! Card */}

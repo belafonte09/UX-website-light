@@ -3,6 +3,7 @@ export const projects = {
     {
       name: "How we used AI to simplify Rule Creation",
       date: "2025",
+      homePageHeading: "How we used AI to simplify Rule Creation",
       modernLayout: true,
       problem: "As our business model shifts to a Managing General Agent, our task is to validate Partner data against a set of rules and address any violations efficiently. Creating and managing business rules was complex and time-consuming for non-technical users, requiring extensive documentation and IT support.",
       challenges: [
@@ -52,6 +53,7 @@ export const projects = {
     {
       name: "How We Fixed our Design-Dev Communication Gap",
       date: "2024",
+      homePageHeading: "Optimizing our Desing-Dev communication",
       comingSoon: true,
       problem: "Our Company strategy shifted → my role changed to sole UX/UI designer in one team. Through observation and a Spotify health check our team identified that the Design-to-Developer process was unclear. Result: confusion, lack of communication, and misaligned outputs.",
       workshop: {
@@ -113,9 +115,43 @@ export const projects = {
     {
       name: "Boosting Payment Success",
       date: "2024",
+      homePageHeading: "Simplifying customer payments",
+      heroSection: {
+        heading: "Simplifying customer payments for fewer Helpdesk tickets",
+        role: {
+          title: "My Role: Senior UX/UI Designer",
+          items: [
+            "Discovery",
+            "User Research",
+            "Testing",
+            "Iterating",
+            "Design-Dev Handoff",
+            "Quality Assurance",
+            "Tracking results"
+          ]
+        },
+        stakeholders: {
+          title: "Stakeholders",
+          items: [
+            "Product Manager",
+            "Engineering Team",
+            "Business Stakeholders",
+            "Operations Team",
+            "End customer"
+          ]
+        },
+        challenge: {
+          title: "The challenge",
+          description: "Customers were confused by unclear emails that missed key information. This led to multiple complaints and calls to the call center, creating unnecessary manual work."
+        },
+        solution: {
+          title: "The solution",
+          description: "We redesigned the emails to clearly highlight important details and guide customers step by step, making it easy for them to complete payments successfully."
+        }
+      },
       modernLayout: true,
       overview: {
-        title: "Boosting Payment Success During Dunning",
+        title: "Simplifying customer payments for fewer Helpdesk tickets",
         subtitle: "",
         description: "Our customers were struggling to track their dunning information by referring to the dunning letters they receive via email. Consequently, they frequently turn to our Partners or reach out to our OPS Team to seek clarification and answers to their inquiries which eventually create manual work of around 6 hours a week.",
         keyPoints: [
@@ -262,6 +298,38 @@ export const projects = {
     {
       name: "Simplifying Compliance Through Better Data Visibility",
       date: "2024",
+      homePageHeading: "Designing a Dashboard for instant insights",
+      heroSection: {
+        heading: "Designing a Dashboard that provides an instant overview of what needs fixing",
+        role: {
+          title: "My Role: Senior UX/UI Designer",
+          items: [
+            "Discovery",
+            "User Research",
+            "Testing",
+            "Iterating",
+            "Design-Dev Hanoff",
+            "Quality Assurance",
+            "Tracking results"
+          ]
+        },
+        stakeholders: {
+          title: "Stakeholders",
+          items: [
+            "Product Manager",
+            "Engineering Team",
+            "Business Stakeholders"
+          ]
+        },
+        challenge: {
+          title: "The challenge",
+          description: "Underwriters had to search through endless spreadsheets to spot issues, which made it slow and easy to miss important problems."
+        },
+        solution: {
+          title: "The solution",
+          description: "We designed a dashboard that reads the data for them, highlights what's going wrong instantly, and frees them to focus on fixing rather than hunting."
+        }
+      },
       overview: {
         title: "Case Study: Simplifying Compliance Through Better Data Visibility",
         subtitle: "Transforming complex insurance compliance data into an intuitive, user-friendly experience",

@@ -20,6 +20,8 @@ import AIUsabilityTestingSection from '@/components/AIUsabilityTestingSection';
 import AIFinalUISection from '@/components/AIFinalUISection';
 import AIImpactSection from '@/components/AIImpactSection';
 import ProjectNavigation from '@/components/ProjectNavigation';
+import InfoListCard from '@/components/InfoListCard';
+import ChallengeSolutionCard from '@/components/ChallengeSolutionCard';
 
 interface ProjectDetailProps {
   projects: {
@@ -312,7 +314,9 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                     <div className="mb-16">
                       <h1 className="text-5xl md:text-6xl font-sora font-bold text-foreground leading-tight lg:leading-relaxed mb-8">
                         {project.name === "Simplifying Compliance Through Better Data Visibility" ? (
-                          <>Simplifying Compliance<br />Through Better Data Visibility</>
+                          <>Designing a Dashboard that provides an instant overview of what needs fixing</>
+                        ) : project.name === "Boosting Payment Success" ? (
+                          <>Simplifying customer payments<br />for fewer Helpdesk tickets</>
                         ) : project.overview.title && project.overview.subtitle ? (
                           <>{project.overview.title}<br /><span className="text-4xl md:text-5xl">{project.overview.subtitle}</span></>
                         ) : (
@@ -320,6 +324,113 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                         )}
                       </h1>
                     </div>
+
+                    {/* Hero Section - Role, Stakeholders, Challenge/Solution */}
+                    {project.heroSection && (
+                      <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] bg-blush py-16 lg:py-32 mb-16 lg:mb-32">
+                        <div className="max-w-4xl mx-auto px-4">
+                          {/* Role & Stakeholders Grid */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <InfoListCard
+                              title={project.heroSection.role.title}
+                              items={project.heroSection.role.items}
+                            />
+                            <InfoListCard
+                              title={project.heroSection.stakeholders.title}
+                              items={project.heroSection.stakeholders.items}
+                            />
+                          </div>
+
+                          {/* Challenge/Solution Card */}
+                          <ChallengeSolutionCard
+                            challenge={project.heroSection.challenge}
+                            solution={project.heroSection.solution}
+                          />
+
+                          {/* Final UI Video - Only for Compliance */}
+                          {project.name === "Simplifying Compliance Through Better Data Visibility" && (
+                            <div className="mt-16 lg:mt-32">
+                              <div className="bg-white border border-stroke rounded-2xl p-6 md:p-8">
+                                <div className="bg-card rounded-lg overflow-hidden">
+                                  <video
+                                    controls
+                                    preload="metadata"
+                                    className="w-full h-auto aspect-video object-contain p-4"
+                                    playsInline
+                                  >
+                                    <source src="/videos/compliance-validation-final-ui.mov" type="video/quicktime" />
+                                    <source src="/videos/compliance-validation-final-ui.mp4" type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                  </video>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Impact Section */}
+                          <div className="mt-16 lg:mt-32">
+                            <div className="space-y-12">
+                              <h3 className="text-3xl font-sora font-bold text-foreground">
+                                Impact
+                              </h3>
+
+                              {project.name === "Simplifying Compliance Through Better Data Visibility" ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                  <ImpactCard variant="reduced-work" bgColor="bg-white" />
+                                  <ImpactCard variant="faster-close" bgColor="bg-white" />
+                                  <ImpactCard variant="data-accuracy" bgColor="bg-white" />
+                                  <ImpactCard variant="empowered-users" bgColor="bg-white" />
+                                </div>
+                              ) : project.name === "Boosting Payment Success" && project.impactSummary?.kpiTable ? (
+                                <div className="w-full">
+                                  <div className="bg-white border border-stroke rounded-2xl p-6 md:p-8 overflow-hidden">
+                                    <div className="overflow-x-auto">
+                                      <table className="w-full">
+                                        <thead>
+                                          <tr className="border-b border-stroke">
+                                            <th className="text-left py-4 px-2 text-lg md:text-xl font-sora font-bold text-foreground">
+                                              KPI
+                                            </th>
+                                            <th className="text-left py-4 px-2 text-lg md:text-xl font-sora font-bold text-foreground">
+                                              Before
+                                            </th>
+                                            <th className="text-left py-4 px-2 text-lg md:text-xl font-sora font-bold text-foreground">
+                                              After
+                                            </th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {project.impactSummary.kpiTable.map((row, index) => (
+                                            <tr key={index} className="border-b border-stroke last:border-b-0">
+                                              <td className="py-4 px-2 text-base md:text-lg font-work-sans text-foreground">
+                                                {row.kpi}
+                                              </td>
+                                              <td className="py-4 px-2 text-base md:text-lg font-work-sans text-foreground">
+                                                {row.before}
+                                              </td>
+                                              <td className="py-4 px-2 text-base md:text-lg font-work-sans text-foreground">
+                                                {row.after}
+                                              </td>
+                                            </tr>
+                                          ))}
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : null}
+                            </div>
+                          </div>
+
+                          {/* Section Transition Heading */}
+                          <div className="mt-16 lg:mt-32">
+                            <h2 className="text-5xl md:text-6xl font-sora font-bold text-foreground leading-tight lg:leading-relaxed">
+                              Here's how we did it...
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     {/* Overview Section */}
                     <div className="mb-16">
@@ -975,8 +1086,8 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
 
                       {/* Key Insight Card 2 */}
                       <KeyInsightCard
-                        insight='Users wanted to <strong>see patterns</strong> in violations across different policies to identify systemic issues rather than just individual violations.'
-                        update='I designed a dashboard view that groups violations by type and frequency, allowing users to spot trends and recurring problems quickly.'
+                        insight="During testing, we realized stakeholders were juggling multiple tasks and often didn't prioritise checking for violations. They needed the system to tell them when something required attention."
+                        update="This insight led me to design a notification flow. An automatic email alert with a direct link to the compliance report, helping them stay informed and quickly prioritize what needs action."
                       />
 
                       {/* Key Insight Image 2 */}
@@ -1063,10 +1174,10 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                         </h3>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <ImpactCard variant="reduced-work" />
-                          <ImpactCard variant="faster-close" />
-                          <ImpactCard variant="data-accuracy" />
-                          <ImpactCard variant="empowered-users" />
+                          <ImpactCard variant="reduced-work" bgColor="bg-white" />
+                          <ImpactCard variant="faster-close" bgColor="bg-white" />
+                          <ImpactCard variant="data-accuracy" bgColor="bg-white" />
+                          <ImpactCard variant="empowered-users" bgColor="bg-white" />
                         </div>
                       </div>
 

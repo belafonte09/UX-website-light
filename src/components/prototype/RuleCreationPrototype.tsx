@@ -91,7 +91,7 @@ const RuleCreationPrototype = ({ onAnyInteraction }: RuleCreationPrototypeProps)
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex font-system" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
+    <div className="min-h-screen bg-white flex font-system" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif' }}>
       {/* Left Sidebar */}
       <SidebarNavigation />
 

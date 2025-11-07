@@ -350,18 +350,20 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                           {/* Final UI Video - Only for Compliance */}
                           {project.name === "Simplifying Compliance Through Better Data Visibility" && (
                             <div className="mt-16 lg:mt-32">
-                              <div className="bg-white border border-stroke rounded-2xl p-6 md:p-8">
-                                <div className="bg-card rounded-lg overflow-hidden">
-                                  <video
-                                    controls
-                                    preload="metadata"
-                                    className="w-full h-auto aspect-video object-contain p-4"
-                                    playsInline
-                                  >
-                                    <source src="/videos/compliance-validation-final-ui.mov" type="video/quicktime" />
-                                    <source src="/videos/compliance-validation-final-ui.mp4" type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                  </video>
+                              <div className="w-full lg:w-screen lg:relative lg:left-1/2 lg:right-1/2 lg:-ml-[50vw] lg:-mr-[50vw] lg:px-[250px]">
+                                <div className="bg-white rounded-lg p-4 md:p-6">
+                                  <div className="bg-card rounded-lg overflow-hidden">
+                                    <video
+                                      controls
+                                      preload="metadata"
+                                      className="w-full h-auto aspect-video object-contain p-4"
+                                      playsInline
+                                    >
+                                      <source src="/videos/compliance-validation-final-ui.mp4" type="video/mp4" />
+                                      <source src="/videos/compliance-validation-final-ui.mov" type="video/quicktime" />
+                                      Your browser does not support the video tag.
+                                    </video>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -1159,8 +1161,8 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                               className="w-full h-auto aspect-video object-contain p-4"
                               playsInline
                             >
+                              <source src="/videos/compliance-validation-final-ui.mp4" type="video/mp4" />
                               <source src="/videos/compliance-validation-final-ui.mov" type="video/quicktime" />
-                              <source src="/videos/compliance-validation-final-ui.mov" type="video/mp4" />
                               Your browser does not support the video tag.
                             </video>
                           </div>

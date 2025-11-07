@@ -537,7 +537,7 @@ const Index = () => {
 
         <div className="flex flex-col items-center text-center px-4 md:px-8 relative z-10">
           {/* Intro Text */}
-          <p className="text-base md:text-lg font-sora font-bold uppercase mb-4 md:mb-6" style={{
+          <p className="text-base md:text-lg font-sora font-bold uppercase mb-6 md:mb-10" style={{
             fontFamily: 'Sora, sans-serif',
             fontSize: 'clamp(16px, 3vw, 20px)',
             fontWeight: '700',
@@ -584,10 +584,10 @@ const Index = () => {
       </section>
 
       {/* Content Cards */}
-      <div className="mx-auto px-2 md:px-8 lg:px-[380px] pt-24 pb-96 space-y-4 bg-greige">
+      <div className="mx-auto px-2 md:px-2 lg:px-[380px] pt-24 pb-96 space-y-4 bg-greige">
 
         {/* Selected Projects Card */}
-        <div id="projects" className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-16 md:pb-[72px] md:pr-16 text-text">
+        <div id="projects" className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-8 md:pb-[72px] md:pr-8 text-text">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-24">Selected Projects</h1>
 
           {/* Projects Stack - 100px spacing */}

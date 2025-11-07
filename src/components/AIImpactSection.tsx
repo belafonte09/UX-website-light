@@ -1,3 +1,4 @@
+
 import React from 'react';
 import NumberImpactCard from '@/components/NumberImpactCard';
 
@@ -11,24 +12,10 @@ const AIImpactSection: React.FC = () => {
 
         <div className="space-y-12 lg:space-y-24">
           <p className="text-lg font-work-sans text-foreground leading-relaxed">
-            By implementing design changes (especially around automated validation
-            and feedback), we transformed how the Underwriting team and developers
-            interacted with rule management.
+          What once took weeks now happens in days. Underwriters can create and test their own rules instantly, while developers save hours of manual translation work.
           </p>
 
-          {/* Number Impact Cards - Same as Boosting Payment Success */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <NumberImpactCard
-              percentage="70%"
-              description="REDUCTION IN PROCESS TIME"
-            />
-            <NumberImpactCard
-              percentage="80%"
-              description="MORE ACCURACY"
-            />
-          </div>
-
-          {/* KPI Table Visual */}
+          {/* KPI Table Visual - Contained in column */}
           <div className="w-full">
             <img
               src="/Case Studies/ai project/Ai - KPI Table.png"

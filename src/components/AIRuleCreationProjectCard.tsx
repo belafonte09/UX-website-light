@@ -15,7 +15,7 @@ const AIRuleCreationProjectCard: React.FC<AIRuleCreationProjectCardProps> = ({
       onClick={onClick}
     >
       {/* Image Container with horizontal padding */}
-      <div className="w-full px-6 md:px-20 lg:px-[148px]">
+      <div className="w-full px-0 md:px-20 lg:px-[148px]">
         <div className="relative bg-butter rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
           {/* Base project image */}
           <img
@@ -45,7 +45,7 @@ const AIRuleCreationProjectCard: React.FC<AIRuleCreationProjectCardProps> = ({
               <div>
                 {/* Title */}
                 <h3 className="ai-rule-text text-[26px] font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
-                  How we used AI to assist in<br />Rule creation
+                Designing a tool that lets you describe complex rules in English, not code.
                 </h3>
 
                 {/* Year */}

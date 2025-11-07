@@ -15,7 +15,7 @@ const DesignDevProjectCard: React.FC<DesignDevProjectCardProps> = ({
       onClick={onClick}
     >
       {/* Image Container with horizontal padding */}
-      <div className="w-full px-6 md:px-20 lg:px-[148px]">
+      <div className="w-full px-0 md:px-20 lg:px-[148px]">
         <div className="relative bg-butter rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
           {/* Base project image */}
           <img

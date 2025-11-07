@@ -16,6 +16,7 @@ import BridgingGapsIcon from '../components/icons/BridgingGapsIcon';
 import ExperienceIcon from '../components/icons/ExperienceIcon';
 import AlwaysLearningIcon from '../components/icons/AlwaysLearningIcon';
 import Footer from '../components/Footer';
+import ProjectNavigation from '../components/ProjectNavigation';
 import { projects } from '../data/projects';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -449,6 +450,9 @@ const Index = () => {
 
   return (
     <>
+    {/* Navigation */}
+    <ProjectNavigation showHomeLink={false} />
+
     {/* Skip Navigation Link */}
     <a
       href="#main-content"
@@ -459,7 +463,7 @@ const Index = () => {
 
     <main id="main-content" className="min-h-screen bg-riso-white md:bg-background">
       {/* Hero Section - Full Width */}
-      <section id="hero-section" className="relative bg-riso-black text-white min-h-[600px] h-[600px] md:h-[600px] lg:h-[752px] flex items-center justify-center pt-12 md:pt-12 lg:pt-16 pb-20 md:pb-20 lg:pb-24 overflow-hidden">
+      <section id="hero-section" className="relative bg-riso-black text-white min-h-[600px] h-auto md:h-auto lg:h-auto flex items-center justify-center pt-24 pb-24 overflow-hidden">
         {/* Physics-based Animation Styles */}
         <style jsx>{`
           .shape-physics {
@@ -470,7 +474,7 @@ const Index = () => {
           /* Ensure hero section is always visible */
           #hero-section {
             min-height: 600px;
-            overflow: visible;
+            overflow: hidden;
           }
 
           /* Mobile viewport fixes */
@@ -531,208 +535,106 @@ const Index = () => {
           </svg>
         </div>
 
-        <div className="flex flex-col items-center text-center px-4 md:px-8 relative z-10 mt-8 md:mt-0">
-          {/* Heading and Photo Group - Closer together */}
-          <div className="space-y-2 mb-8">
-            {/* Main Heading */}
-            <h1 className="text-4xl md:text-5xl font-sora font-bold leading-tight" style={{
-              fontFamily: 'Sora, sans-serif',
-              fontSize: '48px',
-              lineHeight: '1.25',
-              fontWeight: '800',
-              color: 'white',
-              textTransform: 'uppercase'
-            }}>
-              HI,<br />I'M KARIN
-            </h1>
-
-            {/* Profile Image */}
-            <div className="relative w-[280px] h-[280px] md:w-[350px] md:h-[350px] mx-auto">
-              <img
-                src="/images/Hero Section/Karin Photo.png"
-                alt="Karin's portrait photo"
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
-
-          {/* Bottom Text - Separate with more space */}
-          <p className="w-full max-w-[90vw] md:max-w-[450px] px-4" style={{
+        <div className="flex flex-col items-center text-center px-4 md:px-8 relative z-10">
+          {/* Intro Text */}
+          <p className="text-base md:text-lg font-sora font-bold uppercase mb-4 md:mb-6" style={{
             fontFamily: 'Sora, sans-serif',
-            fontSize: '24px',
-            fontWeight: '400',
+            fontSize: 'clamp(16px, 3vw, 20px)',
+            fontWeight: '700',
             color: 'white',
+            letterSpacing: '0.05em',
             lineHeight: '1.4'
           }}>
-            and I would love to bring my <strong>UX/UI design skills</strong> to your company!
+            HI,<br />I'M KARIN
+          </p>
+
+          {/* Main Heading */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-sora font-extrabold mb-0 md:mb-1" style={{
+            fontFamily: 'Sora, sans-serif',
+            fontSize: 'clamp(36px, 6vw, 64px)',
+            fontWeight: '800',
+            color: 'white',
+            lineHeight: '1.1'
+          }}>
+            Senior<br />UX/UI Designer
+          </h1>
+
+          {/* Profile Image */}
+          <div className="relative w-[280px] h-[280px] md:w-[350px] md:h-[350px] mx-auto mb-4 md:mb-6">
+            <img
+              src="/images/Hero Section/Karin Photo.png"
+              alt="Karin's portrait photo"
+              className="w-full h-full object-contain"
+            />
+          </div>
+
+          {/* Bottom Text */}
+          <p className="w-full max-w-[90vw] md:max-w-[550px] px-4" style={{
+            fontFamily: 'Sora, sans-serif',
+            fontSize: 'clamp(18px, 3.5vw, 24px)',
+            fontWeight: '400',
+            color: 'white',
+            lineHeight: '1.5'
+          }}>
+            Balancing real-world constraints<br className="hidden md:block" />
+            with design that's usable, efficient,<br className="hidden md:block" />
+            and delightfully creative.
           </p>
         </div>
       </section>
 
-      {/* Navigation Section */}
-      <nav className="bg-greige py-16 md:py-16 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 lg:gap-20">
-            <a
-              href="https://docs.google.com/document/d/1a1HvTLUeWnqcciY6NEE_Kfmp7OAbA702/edit"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-block text-riso-black transition-all duration-300 no-underline font-medium text-xl focus:outline-none active:text-purple px-2 py-1 hover:bg-transparent select-none"
-              style={{
-                WebkitTapHighlightColor: 'transparent',
-                WebkitUserSelect: 'none',
-                userSelect: 'none',
-                outline: 'none',
-                border: 'none',
-                boxShadow: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none'
-              }}
-            >
-              Resume
-              <svg
-                className="absolute left-0 w-full overflow-visible opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-                viewBox="0 0 100 8"
-                preserveAspectRatio="none"
-                style={{ height: '8px', top: 'calc(100% - 2px)' }}
-              >
-                <path
-                  d="M2,4 Q25,1 50,4 T98,4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </a>
-            <a
-              href="#projects"
-              className="group relative inline-block text-riso-black transition-all duration-300 no-underline font-medium text-xl focus:outline-none active:text-purple px-2 py-1 hover:bg-transparent select-none"
-              style={{
-                WebkitTapHighlightColor: 'transparent',
-                WebkitUserSelect: 'none',
-                userSelect: 'none',
-                outline: 'none',
-                border: 'none',
-                boxShadow: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none'
-              }}
-            >
-              Projects
-              <svg
-                className="absolute left-0 w-full overflow-visible opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-                viewBox="0 0 100 8"
-                preserveAspectRatio="none"
-                style={{ height: '8px', top: 'calc(100% - 2px)' }}
-              >
-                <path
-                  d="M2,4 Q25,1 50,4 T98,4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </a>
-            <a
-              href="#about"
-              className="group relative inline-block text-riso-black transition-all duration-300 no-underline font-medium text-xl focus:outline-none active:text-purple px-2 py-1 hover:bg-transparent select-none"
-              style={{
-                WebkitTapHighlightColor: 'transparent',
-                WebkitUserSelect: 'none',
-                userSelect: 'none',
-                outline: 'none',
-                border: 'none',
-                boxShadow: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none'
-              }}
-            >
-              About
-              <svg
-                className="absolute left-0 w-full overflow-visible opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-                viewBox="0 0 100 8"
-                preserveAspectRatio="none"
-                style={{ height: '8px', top: 'calc(100% - 2px)' }}
-              >
-                <path
-                  d="M2,4 Q25,1 50,4 T98,4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/karin-hoffmann"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative inline-block text-riso-black transition-all duration-300 no-underline font-medium text-xl focus:outline-none active:text-purple px-2 py-1 hover:bg-transparent select-none"
-              style={{
-                WebkitTapHighlightColor: 'transparent',
-                WebkitUserSelect: 'none',
-                userSelect: 'none',
-                outline: 'none',
-                border: 'none',
-                boxShadow: 'none',
-                WebkitAppearance: 'none',
-                MozAppearance: 'none'
-              }}
-            >
-              LinkedIn
-              <svg
-                className="absolute left-0 w-full overflow-visible opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-                viewBox="0 0 100 8"
-                preserveAspectRatio="none"
-                style={{ height: '8px', top: 'calc(100% - 2px)' }}
-              >
-                <path
-                  d="M2,4 Q25,1 50,4 T98,4"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </nav>
-
       {/* Content Cards */}
-      <div className="mx-auto px-2 md:px-8 lg:px-[380px] pt-0 pb-96 space-y-4 bg-greige">
+      <div className="mx-auto px-2 md:px-8 lg:px-[380px] pt-24 pb-96 space-y-4 bg-greige">
 
         {/* Selected Projects Card */}
         <div id="projects" className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-16 md:pb-[72px] md:pr-16 text-text">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-24">Selected Projects</h1>
 
-          {/* Projects Stack - 60px spacing */}
-          <div className="space-y-[60px]">
+          {/* Projects Stack - 100px spacing */}
+          <div className="space-y-[100px]">
             {/* Project 1: Compliance */}
-            <ComplianceProjectCard
-              image="/images/Featured Projects/compliance-mockup.png"
-              onClick={() => window.open(`/portfolio/element/${encodeURIComponent('Simplifying Compliance Through Better Data Visibility')}`, '_blank')}
-            />
+            <div>
+              <ComplianceProjectCard
+                image="/images/Featured Projects/compliance-mockup.png"
+                onClick={() => window.open(`/portfolio/element/${encodeURIComponent('Simplifying Compliance Through Better Data Visibility')}`, '_blank')}
+              />
+              <h2 className="font-sora font-normal text-[20px] italic text-foreground text-center mt-6">
+                {projects.element[3].homePageHeading}
+              </h2>
+            </div>
 
             {/* Project 2: Payment Success */}
-            <PaymentSuccessProjectCard
-              image="/images/Featured Projects/boosting payment success.png"
-              onClick={() => window.open(`/portfolio/element/${encodeURIComponent('Boosting Payment Success')}`, '_blank')}
-            />
+            <div>
+              <PaymentSuccessProjectCard
+                image="/images/Featured Projects/boosting payment success.png"
+                onClick={() => window.open(`/portfolio/element/${encodeURIComponent('Boosting Payment Success')}`, '_blank')}
+              />
+              <h2 className="font-sora font-normal text-[20px] italic text-foreground text-center mt-6">
+                {projects.element[2].homePageHeading}
+              </h2>
+            </div>
 
             {/* Project 3: Workshop/ValGTP */}
-            <AIRuleCreationProjectCard
-              image="/images/Featured Projects/ValGTP-mockup.png"
-              onClick={() => window.open(`/portfolio/element/${encodeURIComponent('How we used AI to simplify Rule Creation')}`, '_blank')}
-            />
+            <div>
+              <AIRuleCreationProjectCard
+                image="/images/Featured Projects/ValGTP-mockup.png"
+                onClick={() => window.open(`/portfolio/element/${encodeURIComponent('How we used AI to simplify Rule Creation')}`, '_blank')}
+              />
+              <h2 className="font-sora font-normal text-[20px] italic text-foreground text-center mt-6">
+                {projects.element[0].homePageHeading}
+              </h2>
+            </div>
 
             {/* Project 4: Design-Dev Gap */}
-            <DesignDevProjectCard
-              image="/images/Featured Projects/Design-dev-gap.png"
-              onClick={() => window.open(`/portfolio/element/${encodeURIComponent('How We Fixed our Design-Dev Communication Gap')}`, '_blank')}
-            />
+            <div>
+              <DesignDevProjectCard
+                image="/images/Featured Projects/Design-dev-gap.png"
+                onClick={() => window.open(`/portfolio/element/${encodeURIComponent('How We Fixed our Design-Dev Communication Gap')}`, '_blank')}
+              />
+              <h2 className="font-sora font-normal text-[20px] italic text-foreground text-center mt-6">
+                {projects.element[1].homePageHeading}
+              </h2>
+            </div>
           </div>
 
           {/* View More Work Button */}

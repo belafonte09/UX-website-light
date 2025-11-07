@@ -20,7 +20,7 @@ const PolicyHeader = () => {
             <input
               type="text"
               value="Pet_Health"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#024751] focus:border-[#024751] text-sm"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#024751] focus:border-[#024751] text-sm text-gray-900 bg-gray-200"
               readOnly
             />
           </div>
@@ -31,7 +31,7 @@ const PolicyHeader = () => {
               Copy from
             </label>
             <div className="relative">
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#024751] focus:border-[#024751] text-sm appearance-none bg-white">
+              <select className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#024751] focus:border-[#024751] text-sm text-gray-900 appearance-none bg-gray-200">
                 <option>Select</option>
                 <option>Pet Health Template</option>
                 <option>Auto Insurance Template</option>
@@ -47,7 +47,7 @@ const PolicyHeader = () => {
               Status
             </label>
             <div className="relative">
-              <select className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#024751] focus:border-[#024751] text-sm appearance-none bg-white">
+              <select className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#024751] focus:border-[#024751] text-sm text-gray-900 appearance-none bg-gray-200">
                 <option>Draft</option>
                 <option>Active</option>
                 <option>Inactive</option>

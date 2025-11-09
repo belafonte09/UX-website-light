@@ -587,7 +587,7 @@ const Index = () => {
       <div className="mx-auto px-2 md:px-2 lg:px-[380px] pt-24 pb-96 space-y-4 bg-greige">
 
         {/* Selected Projects Card */}
-        <div id="projects" className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-8 md:pb-[72px] md:pr-8 text-text">
+        <div id="projects" className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-8 md:pb-[72px] md:pr-8 xl:pl-[116px] xl:pr-[116px] text-text">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-24">Selected Projects</h1>
 
           {/* Projects Stack - 100px spacing */}

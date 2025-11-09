@@ -45,7 +45,7 @@ const DesignDevProjectCard: React.FC<DesignDevProjectCardProps> = ({
               <div>
                 {/* Title */}
                 <h3 className="design-dev-text text-base md:text-lg lg:text-xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
-                  Fixing the Design-Dev<br />communication gap
+                  Optimizing our Design-Dev communication process
                 </h3>
 
                 {/* Year */}

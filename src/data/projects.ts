@@ -347,8 +347,7 @@ export const projects = {
       },
       problem: "The existing process was highly manual. Each BDX file had to be checked line by line to confirm that the data followed contract terms, policies were compliant with internal and legal standards, and calculations and totals were accurate. Even small errors could lead to compliance risks or financial inaccuracies.",
       challenge: {
-        title: "The Challenge",
-        description: "We quickly realized this wasn't just a data problem — it was a usability problem. Our underwriters needed a clear, intuitive way to review, validate, and act on data without relying on IT teams to process or interpret it.",
+        title: "User Painpoints",
         painPoints: [
           {
             title: "Manual Process",

@@ -2,6 +2,17 @@ import React from 'react';
 
 const Footer = () => {
   return (
+    <>
+    {/* Mobile Footer - Static Image */}
+    <footer className="block md:hidden w-full bg-riso-black">
+      <img
+        src="/images/footer section/footer mobile version.svg"
+        alt="Footer"
+        className="w-full h-auto"
+      />
+    </footer>
+
+    {/* Desktop Footer - Animated Shapes */}
     <footer className="hidden md:block relative bg-riso-black w-full md:min-h-[500px] lg:min-h-[930px] overflow-hidden">
       {/* Decorative SVG Shapes Layer - Each with Unique Personality */}
       <div className="absolute inset-0">
@@ -80,6 +91,7 @@ const Footer = () => {
 
       </div>
     </footer>
+    </>
   );
 };
 

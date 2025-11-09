@@ -10,6 +10,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { projects } from '@/data/projects';
 
+interface Project {
+  name: string;
+  pdfUrl?: string;
+  [key: string]: unknown;
+}
+
 interface ProjectsDropdownMenuProps {
   children: React.ReactNode;
 }
@@ -36,7 +42,7 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
 
   const handleMoreWorkProjectClick = (company: string, projectName: string) => {
     const projectList = projects[company as keyof typeof projects];
-    const project = projectList.find((p: any) => p.name === projectName);
+    const project = projectList.find((p: Project) => p.name === projectName);
     if (project?.pdfUrl) {
       window.open(project.pdfUrl, '_blank');
     }

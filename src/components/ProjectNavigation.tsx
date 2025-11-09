@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ProjectsDropdownMenu from './ProjectsDropdownMenu';
 
 interface ProjectNavigationProps {
   showHomeLink?: boolean;
@@ -120,37 +121,36 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = ({ showHomeLink = tr
             />
           </svg>
         </a>
-        <a
-          href="/#projects"
-          onClick={handleProjectsClick}
-          className="group relative inline-block text-riso-black transition-all duration-300 no-underline font-medium text-xl focus:outline-none active:text-purple px-2 py-1 hover:bg-transparent select-none cursor-pointer"
-          style={{
-            WebkitTapHighlightColor: 'transparent',
-            WebkitUserSelect: 'none',
-            userSelect: 'none',
-            outline: 'none',
-            border: 'none',
-            boxShadow: 'none',
-            WebkitAppearance: 'none',
-            MozAppearance: 'none'
-          }}
-        >
-          Projects
-          <svg
-            className="absolute left-0 w-full overflow-visible opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
-            viewBox="0 0 100 8"
-            preserveAspectRatio="none"
-            style={{ height: '8px', top: 'calc(100% - 2px)' }}
+        <ProjectsDropdownMenu>
+          <button
+            className="group relative inline-block text-riso-black transition-all duration-300 no-underline font-medium text-xl focus:outline-none active:text-purple px-2 py-1 hover:bg-transparent select-none cursor-pointer bg-transparent border-none"
+            style={{
+              WebkitTapHighlightColor: 'transparent',
+              WebkitUserSelect: 'none',
+              userSelect: 'none',
+              outline: 'none',
+              boxShadow: 'none',
+              WebkitAppearance: 'none',
+              MozAppearance: 'none'
+            }}
           >
-            <path
-              d="M2,4 Q25,1 50,4 T98,4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-        </a>
+            Projects
+            <svg
+              className="absolute left-0 w-full overflow-visible opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none"
+              viewBox="0 0 100 8"
+              preserveAspectRatio="none"
+              style={{ height: '8px', top: 'calc(100% - 2px)' }}
+            >
+              <path
+                d="M2,4 Q25,1 50,4 T98,4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </ProjectsDropdownMenu>
         <a
           href="/#about"
           onClick={handleAboutClick}

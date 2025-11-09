@@ -18,7 +18,7 @@ const ImpactCard: React.FC<ImpactCardProps> = ({
         return {
           icon: Clock,
           title: 'Reduced Manual Work',
-          description: 'From 8 hours per BDX to 30mins per BDX!'
+          description: 'From 5 hours per file to 30mins per file'
         };
       case 'faster-close':
         return {

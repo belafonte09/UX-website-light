@@ -40,16 +40,16 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
             </svg>
 
             {/* Text content overlay */}
-            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col h-full">
+            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 xl:p-12 2xl:p-16 flex flex-col h-full">
               {/* Top section - Title and Year */}
               <div>
                 {/* Title */}
-                <h3 className="payment-success-text text-base md:text-lg lg:text-xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                <h3 className="payment-success-text text-base md:text-lg lg:text-xl xl:text-lg 2xl:text-xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
                 Designing an email experience that drives faster, easier customer payment
                 </h3>
 
                 {/* Year */}
-                <p className="payment-success-text text-base md:text-lg lg:text-xl font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                <p className="payment-success-text text-base md:text-lg lg:text-xl xl:text-lg 2xl:text-xl font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
                   2024
                 </p>
               </div>

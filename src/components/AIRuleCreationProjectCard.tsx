@@ -40,16 +40,16 @@ const AIRuleCreationProjectCard: React.FC<AIRuleCreationProjectCardProps> = ({
             </svg>
 
             {/* Text content overlay */}
-            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col h-full">
+            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 xl:p-12 2xl:p-16 flex flex-col h-full">
               {/* Top section - Title and Year */}
               <div>
                 {/* Title */}
-                <h3 className="ai-rule-text text-base md:text-lg lg:text-xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                <h3 className="ai-rule-text text-base md:text-lg lg:text-xl xl:text-lg 2xl:text-xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
                 Designing a tool that lets you describe complex rules in English, not code.
                 </h3>
 
                 {/* Year */}
-                <p className="ai-rule-text text-base md:text-lg lg:text-xl font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                <p className="ai-rule-text text-base md:text-lg lg:text-xl xl:text-lg 2xl:text-xl font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
                   2025
                 </p>
               </div>

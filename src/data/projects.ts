@@ -308,7 +308,7 @@ export const projects = {
             "User Research",
             "Testing",
             "Iterating",
-            "Design-Dev Hanoff",
+            "Design-Dev Handoff",
             "Quality Assurance",
             "Tracking results"
           ]

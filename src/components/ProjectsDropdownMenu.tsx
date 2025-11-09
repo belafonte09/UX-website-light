@@ -8,6 +8,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { projects } from '@/data/projects';
+
+interface Project {
+  name: string;
+  pdfUrl?: string;
+  [key: string]: unknown;
+}
 
 interface ProjectsDropdownMenuProps {
   children: React.ReactNode;
@@ -33,23 +40,31 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
     navigate(`/portfolio/${company}/${encodeURIComponent(projectName)}`);
   };
 
+  const handleMoreWorkProjectClick = (company: string, projectName: string) => {
+    const projectList = projects[company as keyof typeof projects];
+    const project = projectList.find((p: Project) => p.name === projectName);
+    if (project?.pdfUrl) {
+      window.open(project.pdfUrl, '_blank');
+    }
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         {children}
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="bg-white rounded-2xl border border-stroke shadow-md p-6 min-w-[320px]"
-        align="start"
+        className="bg-white rounded-2xl border border-stroke shadow-md p-4 md:p-6 w-[calc(100vw-2rem)] md:w-auto md:min-w-[320px]"
+        align="center"
       >
-        <DropdownMenuLabel className="text-sm font-sora font-semibold text-foreground mb-2">
+        <DropdownMenuLabel className="text-xs md:text-sm font-sora font-semibold text-foreground mb-2">
           Selected Projects
         </DropdownMenuLabel>
         {selectedProjects.map((project, index) => (
           <DropdownMenuItem
             key={index}
             onClick={() => handleProjectClick(project.company, project.name)}
-            className="py-3 px-2 text-base font-work-sans text-foreground cursor-pointer hover:bg-blush hover:pl-3 transition-all duration-200 rounded-lg"
+            className="py-2.5 md:py-3 px-2 text-sm md:text-base font-work-sans text-foreground cursor-pointer hover:bg-blush hover:pl-3 transition-all duration-200 rounded-lg"
           >
             {project.displayName}
           </DropdownMenuItem>
@@ -57,14 +72,14 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
 
         <DropdownMenuSeparator className="my-4 bg-stroke" />
 
-        <DropdownMenuLabel className="text-sm font-sora font-semibold text-foreground mb-2">
+        <DropdownMenuLabel className="text-xs md:text-sm font-sora font-semibold text-foreground mb-2">
           More Work
         </DropdownMenuLabel>
         {moreProjects.map((project, index) => (
           <DropdownMenuItem
             key={index}
-            onClick={() => handleProjectClick(project.company, project.name)}
-            className="py-3 px-2 text-base font-work-sans text-foreground cursor-pointer hover:bg-blush hover:pl-3 transition-all duration-200 rounded-lg"
+            onClick={() => handleMoreWorkProjectClick(project.company, project.name)}
+            className="py-2.5 md:py-3 px-2 text-sm md:text-base font-work-sans text-foreground cursor-pointer hover:bg-blush hover:pl-3 transition-all duration-200 rounded-lg"
           >
             {project.displayName}
           </DropdownMenuItem>

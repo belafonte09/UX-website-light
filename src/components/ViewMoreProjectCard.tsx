@@ -63,7 +63,7 @@ const ViewMoreProjectCard: React.FC<ViewMoreProjectCardProps> = ({
       onClick={handleImageClick}
     >
       {/* Image Container with horizontal padding */}
-      <div className="w-full px-6 md:px-0 lg:px-8 xl:px-16">
+      <div className="w-full px-0 md:px-0 lg:px-8 xl:px-16 2xl:px-[164px]">
         <div className="relative bg-butter rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
           {/* Base project image */}
           <img
@@ -88,16 +88,16 @@ const ViewMoreProjectCard: React.FC<ViewMoreProjectCardProps> = ({
             </svg>
 
             {/* Text content overlay */}
-            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col h-full">
+            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 xl:p-12 2xl:p-16 flex flex-col h-full">
               {/* Top section - Title and Year */}
               <div>
                 {/* Title */}
-                <h3 className="project-text text-base md:text-lg lg:text-xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                <h3 className="project-text text-base md:text-lg lg:text-2xl xl:text-2xl 2xl:text-3xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
                   {config.displayTitle}
                 </h3>
 
                 {/* Year */}
-                <p className="project-text text-base md:text-lg lg:text-xl font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                <p className="project-text text-base md:text-lg lg:text-2xl xl:text-2xl 2xl:text-3xl font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
                   {date}
                 </p>
               </div>

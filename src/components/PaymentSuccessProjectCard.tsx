@@ -87,8 +87,8 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
         </h2>
       </div>
 
-      {/* Impact Card - 16px spacing below heading */}
-      <div className="mt-4 w-full">
+      {/* Impact Card - Desktop only */}
+      <div className="mt-4 w-full hidden md:block">
         <div
           className="bg-blush w-[82.69%] lg:max-w-[516px] xl:max-w-[516px] mx-auto"
           style={{borderRadius: '40px', aspectRatio: '516/260'}}
@@ -102,19 +102,19 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
                 {/* Frame 613 - Impact items with 16px spacing */}
                 <div className="flex flex-col gap-3 md:gap-4">
                   {/* Impact Heading - 396×36 */}
-                  <h3 className="text-[18px] md:text-[26px] font-work-sans font-semibold text-riso-black leading-7 md:leading-9">
+                  <h3 className="text-[16px] md:text-[26px] font-work-sans font-semibold text-riso-black leading-6 md:leading-9">
                     Impact
                   </h3>
 
                   {/* Item 1 */}
                   <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
-                    <span className="text-[18px] md:text-[24px] font-semibold">75%</span>
+                    <span className="text-[16px] md:text-[24px] font-semibold">75%</span>
                     <span className="text-[14px] md:text-[16px] font-medium">reduction in weekly Helpdesk tickets</span>
                   </p>
 
                   {/* Item 2 */}
                   <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
-                    <span className="text-[18px] md:text-[24px] font-semibold">60%</span>
+                    <span className="text-[16px] md:text-[24px] font-semibold">60%</span>
                     <span className="text-[14px] md:text-[16px] font-medium">increase of on time payments</span>
                   </p>
                 </div>
@@ -122,6 +122,24 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Impact Bullets - Mobile only */}
+      <div className="mt-4 w-full px-4 md:hidden">
+        <ul className="space-y-2 text-blush">
+          <li className="flex items-start gap-2">
+            <span className="mt-1.5 w-1 h-1 bg-blush rounded-full flex-shrink-0"></span>
+            <span className="text-[14px] font-work-sans">
+              <span className="font-semibold">75%</span> reduction in weekly Helpdesk tickets
+            </span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="mt-1.5 w-1 h-1 bg-blush rounded-full flex-shrink-0"></span>
+            <span className="text-[14px] font-work-sans">
+              <span className="font-semibold">60%</span> increase of on time payments
+            </span>
+          </li>
+        </ul>
       </div>
 
       <style jsx>{`

@@ -18,7 +18,7 @@ const AIOverviewSection: React.FC = () => {
         {/* Role & Stakeholders Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <InfoListCard
-            title="My Role: Senior UX/UI Designer"
+            title="My Role: Product Designer"
             items={[
               'Discovery',
               'User Research',

@@ -591,7 +591,7 @@ const Index = () => {
               color: 'white',
               lineHeight: '1.1'
             }}>
-              Senior<br />UX/UI Designer
+              Product,<br />UX/UI Designer
             </h1>
 
             {/* Profile Image */}

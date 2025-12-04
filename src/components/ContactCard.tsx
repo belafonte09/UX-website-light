@@ -135,7 +135,7 @@ const ContactCard: React.FC = () => {
   };
 
   const handleTitleHover = () => {
-    setCardBg('bg-riso-purple');
+    setCardBg('bg-citron');
   };
 
   const handleMouseLeave = () => {

@@ -64,7 +64,7 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
           <DropdownMenuItem
             key={index}
             onClick={() => handleProjectClick(project.company, project.name)}
-            className="py-2.5 md:py-3 px-2 text-sm md:text-base font-work-sans text-foreground cursor-pointer hover:bg-blush hover:pl-3 transition-all duration-200 rounded-lg"
+            className="py-2.5 md:py-3 pl-3 pr-2 text-sm md:text-base font-work-sans text-foreground cursor-pointer hover:bg-citron transition-all duration-200 rounded-lg"
           >
             {project.displayName}
           </DropdownMenuItem>
@@ -79,7 +79,7 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
           <DropdownMenuItem
             key={index}
             onClick={() => handleMoreWorkProjectClick(project.company, project.name)}
-            className="py-2.5 md:py-3 px-2 text-sm md:text-base font-work-sans text-foreground cursor-pointer hover:bg-blush hover:pl-3 transition-all duration-200 rounded-lg"
+            className="py-2.5 md:py-3 pl-3 pr-2 text-sm md:text-base font-work-sans text-foreground cursor-pointer hover:bg-citron transition-all duration-200 rounded-lg"
           >
             {project.displayName}
           </DropdownMenuItem>

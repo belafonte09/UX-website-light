@@ -58,12 +58,13 @@ const ViewMoreProjectCard: React.FC<ViewMoreProjectCardProps> = ({
   };
 
   return (
-    <div
-      className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
-      onClick={handleImageClick}
-    >
-      {/* Image Container with horizontal padding */}
-      <div className="w-full px-0 md:px-0 lg:px-8 xl:px-16 2xl:px-[164px]">
+    <div className="w-full max-w-[624px] lg:max-w-[662px] xl:max-w-[700px] mx-auto">
+      <div
+        className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
+        onClick={handleImageClick}
+      >
+        {/* Image Container */}
+        <div className="w-full">
         <div className="relative bg-butter rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
           {/* Base project image */}
           <img
@@ -124,6 +125,7 @@ const ViewMoreProjectCard: React.FC<ViewMoreProjectCardProps> = ({
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
 

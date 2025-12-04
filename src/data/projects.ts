@@ -300,7 +300,7 @@ export const projects = {
       date: "2024",
       homePageHeading: "Designing a Dashboard for instant insights",
       heroSection: {
-        heading: "Designing a Dashboard that provides an instant overview of what needs fixing",
+        heading: "Designing a dashboard for instant insights",
         role: {
           title: "My Role: Senior UX/UI Designer",
           items: [

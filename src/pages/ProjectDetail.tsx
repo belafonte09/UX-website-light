@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useState, useEffect } from 'react';
 import RuleCreationPrototype from '@/components/prototype/RuleCreationPrototype';
+import ComplianceDashboardPrototype from '@/components/prototype/ComplianceDashboardPrototype';
 import DunningLetterBeforeInteractive from '@/components/prototype/DunningLetterBeforeInteractive';
 import DunningLetterAfterInteractive from '@/components/prototype/DunningLetterAfterInteractive';
 import DunningLetterVisual from '@/components/prototype/DunningLetterVisual';
@@ -314,7 +315,7 @@ const ProjectDetail = ({ projects }: ProjectDetailProps) => {
                     <div className="mb-16">
                       <h1 className="text-5xl md:text-6xl font-sora font-bold text-foreground leading-tight lg:leading-relaxed mb-8">
                         {project.name === "Simplifying Compliance Through Better Data Visibility" ? (
-                          <>Designing a Dashboard that provides an instant overview of what needs fixing</>
+                          <>Designing a dashboard for instant insights</>
                         ) : project.name === "Boosting Payment Success" ? (
                           <>Simplifying customer payments<br />for fewer Helpdesk tickets</>
                         ) : project.overview.title && project.overview.subtitle ? (

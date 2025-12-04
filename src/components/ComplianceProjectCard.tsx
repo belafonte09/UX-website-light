@@ -10,23 +10,24 @@ const ComplianceProjectCard: React.FC<ComplianceProjectCardProps> = ({
   onClick
 }) => {
   return (
-    <div
-      className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
-      onClick={onClick}
-    >
-      {/* Image Container with horizontal padding */}
-      <div className="w-full px-0 md:px-0 lg:px-8 xl:px-16 2xl:px-[164px]">
-        <div className="relative bg-butter rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
+    <div className="w-full max-w-[624px] lg:max-w-[662px] xl:max-w-[700px] mx-auto">
+      {/* Main Card Container */}
+      <div
+        className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
+        onClick={onClick}
+      >
+        {/* Card - 624×429.06px with greige background */}
+        <div className="relative bg-greige overflow-hidden w-full" style={{borderRadius: '40px'}}>
           {/* Base project image */}
           <img
             src={image}
             alt="Compliance project mockup"
-            className="w-full h-auto aspect-[620/426] object-cover group-hover:opacity-0 transition-opacity duration-300 rounded-4xl"
-            style={{borderRadius: '32px'}}
+            className="w-full h-auto aspect-[624/429.06] object-cover group-hover:opacity-0 transition-opacity duration-300"
+            style={{borderRadius: '40px'}}
           />
 
           {/* Animated overlay */}
-          <div className="absolute inset-0 pointer-events-none rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
+          <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{borderRadius: '40px'}}>
             {/* Custom SVG blob that grows from tiny to exact end placement */}
             <svg
               className="compliance-blob absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transform scale-[0.01] group-hover:scale-[120%] transition-all duration-300 ease-out origin-center hidden md:block"
@@ -35,21 +36,21 @@ const ComplianceProjectCard: React.FC<ComplianceProjectCardProps> = ({
             >
               <path
                 d="M11.4642 40.7153C50.0943 -75.1752 246.125 -88.8991 339.312 -81.2747C374.045 -81.2747 457.235 -75.6836 512.13 -53.319C580.75 -25.3634 603.623 7.67594 621.413 99.1684C635.645 172.362 529.073 214.381 474.008 226.241C501.964 226.241 603.623 274.529 621.413 327.9C635.645 370.596 627.343 411.768 621.413 427.016C623.446 492.078 485.021 523.592 415.555 531.216C346.936 538.841 184.282 544.94 82.6239 508.343C-19.0344 471.746 -35.9771 408.379 -31.7412 381.27C-45.9733 295.877 63.9871 242.337 120.746 226.241C64.8342 210.993 36.8788 175.412 11.4642 137.29C-8.86748 106.793 2.99265 60.1996 11.4642 40.7153Z"
-                fill="#CD9EA1"
+                fill="#FDFE70"
               />
             </svg>
 
             {/* Text content overlay */}
-            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 xl:p-12 2xl:p-16 flex flex-col h-full">
+            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col h-full">
               {/* Top section - Title and Year */}
               <div>
                 {/* Title */}
-                <h3 className="compliance-text text-base md:text-lg lg:text-2xl xl:text-2xl 2xl:text-3xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
-                A real-time dashboard that automatically flags violations, so stakeholders can act immediately
+                <h3 className="compliance-text text-[26px] font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                  Simplifying compliance through<br />better data visibility
                 </h3>
 
                 {/* Year */}
-                <p className="compliance-text text-base md:text-lg lg:text-2xl xl:text-2xl 2xl:text-3xl font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                <p className="compliance-text text-[26px] font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
                   2024
                 </p>
               </div>
@@ -73,6 +74,56 @@ const ComplianceProjectCard: React.FC<ComplianceProjectCardProps> = ({
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Heading Section - 16px spacing below card */}
+      <div className="mt-4 w-full">
+        <h2 className="text-[24px] font-work-sans font-semibold text-blush text-center">
+          A Dashboard for instant insights
+        </h2>
+      </div>
+
+      {/* Impact Card - 16px spacing below heading */}
+      <div className="mt-4 w-full">
+        <div
+          className="bg-blush w-[82.69%] lg:max-w-[516px] xl:max-w-[516px] mx-auto"
+          style={{borderRadius: '40px', aspectRatio: '516/260'}}
+        >
+          {/* Inner container with padding - 48px horizontal, 40px vertical */}
+          <div className="px-6 md:px-12 pt-6 md:pt-10 pb-6 md:pb-10 h-full">
+            {/* Content area - flexible width */}
+            <div className="w-full h-full flex items-center">
+              {/* Frame 615 - max 396px wide */}
+              <div className="w-full max-w-[396px]">
+                {/* Frame 613 - Impact items with 16px spacing */}
+                <div className="flex flex-col gap-3 md:gap-4">
+                  {/* Impact Heading - 396×36 */}
+                  <h3 className="text-[18px] md:text-[26px] font-work-sans font-semibold text-riso-black leading-7 md:leading-9">
+                    Impact
+                  </h3>
+
+                  {/* Item 1 */}
+                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                    <span className="text-[18px] md:text-[24px] font-semibold">90%</span>
+                    <span className="text-[14px] md:text-[16px] font-medium">reduction in processing time per file</span>
+                  </p>
+
+                  {/* Item 2 */}
+                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                    <span className="text-[18px] md:text-[24px] font-semibold">80%</span>
+                    <span className="text-[14px] md:text-[16px] font-medium">less reliance on engineers</span>
+                  </p>
+
+                  {/* Item 3 */}
+                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                    <span className="text-[18px] md:text-[24px] font-semibold">95%</span>
+                    <span className="text-[14px] md:text-[16px] font-medium">Higher data accuracy</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>

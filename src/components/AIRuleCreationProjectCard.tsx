@@ -10,24 +10,25 @@ const AIRuleCreationProjectCard: React.FC<AIRuleCreationProjectCardProps> = ({
   onClick
 }) => {
   return (
-    <div
-      className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
-      onClick={onClick}
-    >
-      {/* Image Container with horizontal padding */}
-      <div className="w-full px-0 md:px-0 lg:px-8 xl:px-16 2xl:px-[164px]">
-        <div className="relative bg-butter rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
+    <div className="w-full max-w-[624px] lg:max-w-[662px] xl:max-w-[700px] mx-auto">
+      {/* Main Card Container */}
+      <div
+        className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
+        onClick={onClick}
+      >
+        {/* Card - 624×429.06px with butter background */}
+        <div className="relative bg-butter overflow-hidden w-full" style={{borderRadius: '40px'}}>
           {/* Base project image */}
           <img
             src={image}
             alt="AI rule creation project mockup"
-            className="w-full h-auto aspect-[620/426] object-cover group-hover:opacity-0 transition-opacity duration-300 rounded-4xl"
-            style={{borderRadius: '32px'}}
+            className="w-full h-auto aspect-[624/429.06] object-cover group-hover:opacity-0 transition-opacity duration-300"
+            style={{borderRadius: '40px'}}
           />
 
           {/* Animated overlay */}
-          <div className="absolute inset-0 pointer-events-none rounded-4xl overflow-hidden" style={{borderRadius: '32px'}}>
-            {/* Custom SVG blob that grows from tiny to exact end placement - same as compliance but orange */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{borderRadius: '40px'}}>
+            {/* Custom SVG blob that grows from tiny to exact end placement */}
             <svg
               className="ai-rule-blob absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transform scale-[0.01] group-hover:scale-[120%] transition-all duration-300 ease-out origin-center hidden md:block"
               viewBox="0 0 621 427"
@@ -40,16 +41,16 @@ const AIRuleCreationProjectCard: React.FC<AIRuleCreationProjectCardProps> = ({
             </svg>
 
             {/* Text content overlay */}
-            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 xl:p-12 2xl:p-16 flex flex-col h-full">
+            <div className="absolute inset-0 p-8 md:p-12 lg:p-16 flex flex-col h-full">
               {/* Top section - Title and Year */}
               <div>
                 {/* Title */}
-                <h3 className="ai-rule-text text-base md:text-lg lg:text-2xl xl:text-2xl 2xl:text-3xl font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
-                Designing a tool that lets you describe complex rules in English, not code.
+                <h3 className="ai-rule-text text-[26px] font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                  Designing a tool that lets you describe complex rules<br />in English, not code.
                 </h3>
 
                 {/* Year */}
-                <p className="ai-rule-text text-base md:text-lg lg:text-2xl xl:text-2xl 2xl:text-3xl font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
+                <p className="ai-rule-text text-[26px] font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
                   2025
                 </p>
               </div>
@@ -73,6 +74,56 @@ const AIRuleCreationProjectCard: React.FC<AIRuleCreationProjectCardProps> = ({
                     d="M17 8l4 4m0 0l-4 4m4-4H3"
                   />
                 </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Heading Section - 16px spacing below card */}
+      <div className="mt-4 w-full">
+        <h2 className="text-[24px] font-work-sans font-semibold text-blush text-center">
+          How we used AI to simplify rule creation
+        </h2>
+      </div>
+
+      {/* Impact Card - 16px spacing below heading */}
+      <div className="mt-4 w-full">
+        <div
+          className="bg-blush w-[82.69%] lg:max-w-[516px] xl:max-w-[516px] mx-auto"
+          style={{borderRadius: '40px', aspectRatio: '516/260'}}
+        >
+          {/* Inner container with padding - 48px horizontal, 40px vertical */}
+          <div className="px-6 md:px-12 pt-6 md:pt-10 pb-6 md:pb-10 h-full">
+            {/* Content area - flexible width */}
+            <div className="w-full h-full flex items-center">
+              {/* Frame 615 - max 396px wide */}
+              <div className="w-full max-w-[396px]">
+                {/* Frame 613 - Impact items with 16px spacing */}
+                <div className="flex flex-col gap-3 md:gap-4">
+                  {/* Impact Heading - 396×36 */}
+                  <h3 className="text-[18px] md:text-[26px] font-work-sans font-semibold text-riso-black leading-7 md:leading-9">
+                    Impact
+                  </h3>
+
+                  {/* Item 1 */}
+                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                    <span className="text-[18px] md:text-[24px] font-semibold">80%</span>
+                    <span className="text-[14px] md:text-[16px] font-medium">reduction in processing time per file</span>
+                  </p>
+
+                  {/* Item 2 */}
+                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                    <span className="text-[18px] md:text-[24px] font-semibold">80%</span>
+                    <span className="text-[14px] md:text-[16px] font-medium">less reliance on engineers</span>
+                  </p>
+
+                  {/* Item 3 */}
+                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                    <span className="text-[18px] md:text-[24px] font-semibold">One source of truth</span>
+                    <span className="text-[14px] md:text-[16px] font-medium">- preventing errors</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>

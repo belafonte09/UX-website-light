@@ -272,35 +272,49 @@ const Index = () => {
   const [showMoreProjects, setShowMoreProjects] = useState(false);
 
   useEffect(() => {
-    // Get actual Hero section dimensions
-    const heroSection = document.getElementById('hero-section');
+    // Get actual Hero section dimensions (outer section where shapes are positioned)
+    const heroSection = document.getElementById('hero-outer-section');
     if (!heroSection) return;
 
     let heroRect = heroSection.getBoundingClientRect();
+
+    // Constrain shapes to 1280×800 viewport
+    const maxWidth = 1280;
+    const maxHeight = 800;
+    let constrainedMaxX = Math.min(1, maxWidth / heroRect.width);
+    let constrainedMaxY = Math.min(1, maxHeight / heroRect.height);
 
     // Physics-based collision detection system - All shapes animated with longer trajectories
     // Mobile detection for slower animations
     const isMobile = window.innerWidth < 768;
     const velocityMultiplier = isMobile ? 0.4 : 1; // 40% speed on mobile
 
+    // Initial positions - match CSS exactly (CSS positions from the HTML)
+    // For right-positioned shapes: right-[X%] means the shape is at (100-X)% from left
     const shapes = [
-      { id: 'coral-blob', x: 0.28, y: 0.12, vx: 2.5 * velocityMultiplier, vy: 1.8 * velocityMultiplier, size: 40 },
-      { id: 'gray-star', x: 0.80, y: 0.45, vx: -2.2 * velocityMultiplier, vy: 2.1 * velocityMultiplier, size: 40 },
+      { id: 'coral-blob', x: 0.28, y: 0.18, vx: 2.5 * velocityMultiplier, vy: 1.8 * velocityMultiplier, size: 40 },
+      { id: 'gray-star', x: 0.80, y: 0.45, vx: -2.2 * velocityMultiplier, vy: 2.1 * velocityMultiplier, size: 40 },  // right-[20%] = left-[80%]
       { id: 'yellow-blob', x: 0.17, y: 0.45, vx: 3.0 * velocityMultiplier, vy: -2.4 * velocityMultiplier, size: 40 },
-      { id: 'lime-moon', x: 0.25, y: 0.75, vx: -1.9 * velocityMultiplier, vy: -2.8 * velocityMultiplier, size: 40 },
-      { id: 'purple-m', x: 0.72, y: 0.08, vx: -2.7 * velocityMultiplier, vy: 2.5 * velocityMultiplier, size: 40 },
-      { id: 'pink-circle', x: 0.76, y: 0.85, vx: 1.8 * velocityMultiplier, vy: -3.1 * velocityMultiplier, size: 40 }
+      { id: 'lime-moon', x: 0.25, y: 0.65, vx: -1.9 * velocityMultiplier, vy: -2.8 * velocityMultiplier, size: 40 },
+      { id: 'purple-m', x: 0.72, y: 0.14, vx: -2.7 * velocityMultiplier, vy: 2.5 * velocityMultiplier, size: 40 },  // right-[28%] = left-[72%]
+      { id: 'pink-circle', x: 0.76, y: 0.68, vx: 1.8 * velocityMultiplier, vy: -3.1 * velocityMultiplier, size: 40 }  // right-[24%] = left-[76%]
     ];
 
     const staticShapes = []; // No more static shapes - all are animated
 
     const contentArea = { x1: 0.40, y1: 0.30, x2: 0.60, y2: 0.70 };
 
+    // First project card collision area - starts where shapes should not go
+    // This should be below the visible 800px area on 1280×800 screen
+    const projectCard1Area = { x1: 0.05, y1: 0.72, x2: 0.95, y2: 1.0 };
+
     let animationId: number;
 
-    // Update hero rect on resize
+    // Update hero rect and constraints on resize
     const updateHeroRect = () => {
       heroRect = heroSection.getBoundingClientRect();
+      constrainedMaxX = Math.min(1, maxWidth / heroRect.width);
+      constrainedMaxY = Math.min(1, maxHeight / heroRect.height);
     };
     window.addEventListener('resize', updateHeroRect);
 
@@ -352,18 +366,22 @@ const Index = () => {
         shape.x += shape.vx / heroRect.width;
         shape.y += shape.vy / heroRect.height;
 
-        // Boundary collision (Hero section walls) - Smaller margins for more space usage
-        const margin = (shape.size * 0.5) / heroRect.width; // Smaller margin for more area coverage
+        // Boundary collision (constrained to 1280×800 viewport)
+        const margin = (shape.size * 0.5) / heroRect.width;
+
+        // Use the initial X boundary (don't shrink it on wide screens)
+        // This ensures shapes can move within their natural range
+        const maxRightX = Math.max(constrainedMaxX, 0.85); // Allow movement up to 85% or constrained max, whichever is larger
 
         // Left wall - Add slight angle variation for longer paths
         if (shape.x <= margin) {
           shape.vx = Math.abs(shape.vx) + (Math.random() - 0.5) * 0.3;
           shape.x = margin;
         }
-        // Right wall
-        if (shape.x >= 1 - margin) {
+        // Right wall - more generous constraint
+        if (shape.x >= maxRightX - margin) {
           shape.vx = -Math.abs(shape.vx) + (Math.random() - 0.5) * 0.3;
-          shape.x = 1 - margin;
+          shape.x = maxRightX - margin;
         }
 
         // Top wall
@@ -371,15 +389,13 @@ const Index = () => {
           shape.vy = Math.abs(shape.vy) + (Math.random() - 0.5) * 0.3;
           shape.y = margin;
         }
-        // Bottom wall - Raised boundary for better visual spacing
-        if (shape.y >= 0.85) {
+        // Bottom wall - keep shapes above fold and away from project card
+        // On 1280×800 screen, 70% = 560px which keeps shapes well above the first card
+        const maxBottomY = Math.min(constrainedMaxY * 0.875, 0.70); // 70% of hero or 87.5% of constrained height
+        if (shape.y >= maxBottomY) {
           shape.vy = -Math.abs(shape.vy) + (Math.random() - 0.5) * 0.3;
-          shape.y = 0.85;
+          shape.y = maxBottomY;
         }
-
-        // Extra enforcement - clamp positions within Hero section with raised bottom
-        shape.x = Math.max(margin, Math.min(1 - margin, shape.x));
-        shape.y = Math.max(margin, Math.min(0.85, shape.y));
 
         // Content area collision (avoid text/image)
         const contentMargin = shape.size / heroRect.width;
@@ -394,6 +410,19 @@ const Index = () => {
           else shape.vy = Math.abs(shape.vy);
         }
 
+        // Project card collision (prevent shapes from going behind first card)
+        // Add extra margin to create a buffer zone
+        const cardMargin = (shape.size * 2) / heroRect.width; // Double the margin for earlier detection
+        if (shape.x > projectCard1Area.x1 - cardMargin && shape.x < projectCard1Area.x2 + cardMargin &&
+            shape.y > projectCard1Area.y1 - cardMargin && shape.y < projectCard1Area.y2 + cardMargin) {
+          // Bounce away from project card area - always push upward
+          const cardCenterX = (projectCard1Area.x1 + projectCard1Area.x2) / 2;
+          if (shape.x < cardCenterX) shape.vx = -Math.abs(shape.vx);
+          else shape.vx = Math.abs(shape.vx);
+          // Always bounce upward away from card
+          shape.vy = -Math.abs(shape.vy);
+        }
+
         // Collision with other moving shapes
         shapes.forEach((otherShape, j) => {
           if (i !== j && checkCollision(shape, otherShape)) {
@@ -405,40 +434,44 @@ const Index = () => {
 
         // Update DOM element - Transform relative to Hero section
         const element = document.getElementById(shape.id);
-        if (element) {
-          // Calculate position within Hero section
-          const initialPositions: Record<string, {left: number, top: number}> = {
-            'coral-blob': { left: 28, top: 12 },
-            'gray-star': { left: 80, top: 45 },
-            'yellow-blob': { left: 17, top: 45 },
-            'lime-moon': { left: 25, top: 75 },
-            'purple-m': { left: 72, top: 8 },
-            'pink-circle': { left: 76, top: 85 }
-          };
+        if (element && shape.initialX !== undefined && shape.initialY !== undefined) {
+          // Convert from Hero section normalized coordinates to pixels
+          const currentXPixels = shape.x * heroRect.width;
+          const currentYPixels = shape.y * heroRect.height;
 
-          const initial = initialPositions[shape.id];
-          if (initial) {
-            // Convert from Hero section normalized coordinates to pixels
-            const currentXPixels = shape.x * heroRect.width;
-            const currentYPixels = shape.y * heroRect.height;
+          // Convert initial position from normalized coordinates to pixels
+          const initialXPixels = shape.initialX * heroRect.width;
+          const initialYPixels = shape.initialY * heroRect.height;
 
-            // Convert initial position from viewport % to Hero section pixels
-            const initialXPixels = (initial.left / 100) * heroRect.width;
-            const initialYPixels = (initial.top / 100) * heroRect.height;
+          // Calculate offset from initial position
+          const deltaX = currentXPixels - initialXPixels;
+          const deltaY = currentYPixels - initialYPixels;
 
-            // Calculate offset from initial position
-            const deltaX = currentXPixels - initialXPixels;
-            const deltaY = currentYPixels - initialYPixels;
-
-            element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-          }
+          element.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
         }
       });
 
       animationId = requestAnimationFrame(animate);
     };
 
-    animate();
+    // Initialize all shapes: reset transforms and store initial positions
+    shapes.forEach(shape => {
+      const element = document.getElementById(shape.id);
+      if (element) {
+        // Reset transform to ensure shapes start at CSS positions
+        element.style.transform = 'translate(0px, 0px)';
+
+        // Store the shape's starting position from the shapes array
+        // These match the CSS positions exactly
+        shape.initialX = shape.x;
+        shape.initialY = shape.y;
+      }
+    });
+
+    // Start animation after a brief delay to ensure shapes are visible at initial positions
+    setTimeout(() => {
+      animate();
+    }, 100);
 
     return () => {
       if (animationId) {
@@ -463,7 +496,7 @@ const Index = () => {
 
     <main id="main-content" className="min-h-screen bg-riso-white md:bg-background">
       {/* Hero Section - Full Width */}
-      <section id="hero-section" className="relative bg-riso-black text-white min-h-[600px] h-auto md:h-auto lg:h-auto flex items-center justify-center pt-24 pb-24 overflow-hidden">
+      <section id="hero-outer-section" className="relative bg-riso-black text-white overflow-hidden">
         {/* Physics-based Animation Styles */}
         <style jsx>{`
           .shape-physics {
@@ -494,113 +527,107 @@ const Index = () => {
         `}</style>
         {/* Decorative Background Shapes */}
         {/* Top Left - Coral Blob */}
-        <div className="absolute left-[28%] top-[18%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="coral-blob" id="coral-blob">
+        <div className="absolute left-[28%] top-[18%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="coral-blob" id="coral-blob" style={{ transform: 'translate(0px, 0px)' }}>
           <svg width="68" height="64" viewBox="0 0 68 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <path d="M4.56545 12.7706C8.53187 0.80772 28.6598 -0.608938 38.2279 0.178094C41.7942 0.178094 50.3358 0.755243 55.9723 3.06384C63.0179 5.94959 65.3665 9.3601 67.1931 18.8045C68.6544 26.36 57.712 30.6974 52.0581 31.9217C54.9285 31.9217 65.3665 36.9062 67.1931 42.4154C68.6544 46.8228 67.802 51.0728 67.1931 52.6469C67.4019 59.3629 53.1889 62.6159 46.0563 63.403C39.0106 64.19 22.3099 64.8196 11.8719 61.0419C1.43395 57.2641 -0.30568 50.723 0.129253 47.9247C-1.33206 39.1099 9.95834 33.5832 15.7862 31.9217C10.0453 30.3476 7.17494 26.6748 4.56545 22.7396C2.47785 19.5915 3.69562 14.7819 4.56545 12.7706Z" fill="#FF8B73"/>
           </svg>
         </div>
 
         {/* Top Right - Purple M-shape */}
-        <div className="absolute right-[28%] top-[14%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="purple-m" id="purple-m">
+        <div className="absolute right-[28%] top-[14%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="purple-m" id="purple-m" style={{ transform: 'translate(0px, 0px)' }}>
           <svg width="72" height="65" viewBox="0 0 72 65" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <path d="M0 36.018V52.0081C0 53.5071 0.351777 57.2548 1.75889 60.2529C3.166 63.2511 6.36549 64.6669 7.78935 65H12.3122C19.7498 64.6003 22.1117 56.1722 22.363 52.0081C23.033 44.6793 24.4234 29.8718 24.6244 29.2722C24.8254 28.6726 25.5457 28.5227 25.8808 28.5227C27.8909 28.7225 27.2209 37.9335 26.6346 42.514C25.9645 47.7607 25.2777 58.9538 27.8909 61.752C30.5041 64.5503 34.1726 64.5836 35.6803 64.2505C43.5199 64.0506 46.3173 53.3406 46.7361 48.0106C48.5453 34.8188 49.8351 32.8533 50.2539 33.5196C52.4651 31.5208 52.3478 39.1827 52.0128 43.2635C50.8067 54.8563 53.8554 60.0864 55.5306 61.2523L60.8072 63.0012C69.4509 63.0012 71.7793 50.8421 71.8631 44.7626C72.8681 29.9718 68.094 18.7787 65.5813 15.0311C62.9011 11.2834 54.5255 3.2384 42.4645 1.03977C27.3884 -1.70852 25.6295 1.28962 14.0711 6.53635C4.82437 10.7337 0.837565 27.9397 0 36.018Z" fill="#5556AF"/>
           </svg>
         </div>
 
         {/* Middle Left - Yellow Blob */}
-        <div className="absolute left-[17%] top-[45%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="yellow-blob" id="yellow-blob">
+        <div className="absolute left-[17%] top-[45%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="yellow-blob" id="yellow-blob" style={{ transform: 'translate(0px, 0px)' }}>
           <svg width="61" height="56" viewBox="0 0 61 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <path d="M36.9906 56L1.23985 54.7911L0.0401545 23.361C-0.343747 13.8836 2.11962 8.12942 3.39929 6.43703C7.81415 -0.912797 16.116 -0.493728 19.7151 0.634535C28.1609 2.37528 30.1124 9.58005 30.0324 12.9648C30.6083 20.5081 31.552 22.3939 31.9519 22.3939C33.1036 22.3939 34.0314 14.6572 34.3513 10.7889C36.6547 2.85881 43.7889 1.52102 47.0681 1.84338C58.777 2.03679 61.2244 13.529 60.9845 19.2509V56H36.9906Z" fill="#F8BB2F"/>
           </svg>
         </div>
 
         {/* Middle Right - Gray Star */}
-        <div className="absolute right-[20%] top-[45%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="gray-star" id="gray-star">
+        <div className="absolute right-[20%] top-[45%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="gray-star" id="gray-star" style={{ transform: 'translate(0px, 0px)' }}>
           <svg width="80" height="74" viewBox="0 0 80 74" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <path d="M30.7692 0L42.2743 15.2826L52.709 0L54.3144 21.1812L69.0301 9.65217L62.0736 29.2246L80 33.2464L64.4816 41.2899L80 51.7464H59.9331L64.4816 68.1014L48.9632 58.1812L50.5686 74L37.9933 58.1812L27.5585 70.2464V51.7464L12.0401 61.3985L19.7993 45.3116L0 39.9493L16.0535 33.2464L1.87291 25.7391H23.2776L16.0535 7.50725L33.4448 18.2319L30.7692 0Z" fill="#B3B3B3"/>
           </svg>
         </div>
 
-        {/* Bottom Left - Lime Moon */}
-        <div className="absolute left-[25%] bottom-[18%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="lime-moon" id="lime-moon">
+        {/* Bottom Left - Lime Moon - positioned at 65% from top */}
+        <div className="absolute left-[25%] top-[65%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="lime-moon" id="lime-moon" style={{ transform: 'translate(0px, 0px)' }}>
           <svg width="74" height="71" viewBox="0 0 74 71" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <path d="M24.2374 68.1577C13.1286 63.5129 3.45047 49.0567 0 42.4092C7.27123 42.4092 19.188 40.3897 24.2374 39.38C32.3166 38.8751 45.9501 28.5253 49.7372 23.2241C52.7669 18.9832 58.5738 5.97432 61.0985 0C69.7836 15.3481 72.6282 25.4119 72.9648 28.5253C77.0044 42.4597 68.2519 56.3773 63.3708 61.5943C56.554 70.4296 38.1235 73.9637 24.2374 68.1577Z" fill="#BFD22D"/>
           </svg>
         </div>
 
-        {/* Bottom Right - Pink Circle */}
-        <div className="absolute right-[24%] bottom-[15%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="pink-circle" id="pink-circle">
+        {/* Bottom Right - Pink Circle - positioned at 68% from top */}
+        <div className="absolute right-[24%] top-[68%] w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 z-0 shape-physics" data-shape="pink-circle" id="pink-circle" style={{ transform: 'translate(0px, 0px)' }}>
           <svg width="61" height="54" viewBox="0 0 61 54" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
             <path d="M13.8323 5.54373C21.9231 -2.34214 35.7448 -0.118995 41.6443 1.97831C43.4001 2.39777 48.218 4.87259 53.4433 11.4162C58.6686 17.9598 60.3963 26.8663 60.607 30.5016C62.4611 38.5553 57.3061 46.4411 54.4968 49.3774C49.8615 51.8941 39.5373 54.8304 22.0495 53.7817C8.05923 52.9428 1.89283 42.8058 0.558415 37.8422C0.137022 37.7723 -0.452929 35.2835 0.558415 25.8876C1.56976 16.4916 9.82907 8.41004 13.8323 5.54373Z" fill="#E36785"/>
           </svg>
         </div>
 
-        <div className="flex flex-col items-center text-center px-4 md:px-8 relative z-10">
-          {/* Intro Text */}
-          <p className="text-base md:text-lg font-sora font-bold uppercase mb-6 md:mb-10" style={{
-            fontFamily: 'Sora, sans-serif',
-            fontSize: 'clamp(16px, 3vw, 20px)',
-            fontWeight: '700',
-            color: 'white',
-            letterSpacing: '0.05em',
-            lineHeight: '1.4'
-          }}>
-            HI,<br />I'M KARIN
-          </p>
+        {/* Hero Content Container - shapes are bounded to this area */}
+        <div id="hero-section" className="relative min-h-[600px] flex items-center justify-center pt-24 pb-24">
+          <div className="flex flex-col items-center text-center px-4 md:px-8 relative z-10">
+            {/* Intro Text */}
+            <p className="text-base md:text-lg font-sora font-bold uppercase mb-6 md:mb-10" style={{
+              fontFamily: 'Sora, sans-serif',
+              fontSize: 'clamp(16px, 3vw, 20px)',
+              fontWeight: '700',
+              color: 'white',
+              letterSpacing: '0.05em',
+              lineHeight: '1.4'
+            }}>
+              HI,<br />I'M KARIN
+            </p>
 
-          {/* Main Heading */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-sora font-extrabold mb-0 md:mb-1" style={{
-            fontFamily: 'Sora, sans-serif',
-            fontSize: 'clamp(36px, 6vw, 64px)',
-            fontWeight: '800',
-            color: 'white',
-            lineHeight: '1.1'
-          }}>
-            Senior<br />UX/UI Designer
-          </h1>
+            {/* Main Heading */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-sora font-extrabold mb-0 md:mb-1" style={{
+              fontFamily: 'Sora, sans-serif',
+              fontSize: 'clamp(36px, 6vw, 64px)',
+              fontWeight: '800',
+              color: 'white',
+              lineHeight: '1.1'
+            }}>
+              Senior<br />UX/UI Designer
+            </h1>
 
-          {/* Profile Image */}
-          <div className="relative w-[280px] h-[280px] md:w-[350px] md:h-[350px] mx-auto mb-4 md:mb-6">
-            <img
-              src="/images/Hero Section/Karin Photo.png"
-              alt="Karin's portrait photo"
-              className="w-full h-full object-contain"
-            />
+            {/* Profile Image */}
+            <div className="relative w-[150px] h-[110px] md:w-[180px] md:h-[132px] lg:w-[208px] lg:h-[153px] xl:w-[240px] xl:h-[176px] mx-auto mb-4 md:mb-6">
+              <img
+                src="/images/Hero Section/Karin Photo.png"
+                alt="Karin's portrait photo"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Bottom Text */}
+            <p className="w-full max-w-[90vw] md:max-w-[550px] px-4" style={{
+              fontFamily: 'Sora, sans-serif',
+              fontSize: 'clamp(18px, 3.5vw, 24px)',
+              fontWeight: '400',
+              color: 'white',
+              lineHeight: '1.5'
+            }}>
+              Balancing real-world constraints<br className="hidden md:block" />
+              with design that's usable, efficient,<br className="hidden md:block" />
+              and delightfully creative.
+            </p>
           </div>
-
-          {/* Bottom Text */}
-          <p className="w-full max-w-[90vw] md:max-w-[550px] px-4" style={{
-            fontFamily: 'Sora, sans-serif',
-            fontSize: 'clamp(18px, 3.5vw, 24px)',
-            fontWeight: '400',
-            color: 'white',
-            lineHeight: '1.5'
-          }}>
-            Balancing real-world constraints<br className="hidden md:block" />
-            with design that's usable, efficient,<br className="hidden md:block" />
-            and delightfully creative.
-          </p>
         </div>
-      </section>
 
-      {/* Content Cards */}
-      <div className="mx-auto px-2 md:px-2 lg:px-[100px] xl:px-[180px] 2xl:px-[280px] pt-24 pb-96 space-y-4 bg-greige">
-
-        {/* Selected Projects Card */}
-        <div id="projects" className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-8 md:pb-[72px] md:pr-8 xl:pl-8 xl:pr-8 2xl:pl-[116px] 2xl:pr-[116px] text-text">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-24">Selected Projects</h1>
-
-          {/* Projects Stack - 100px spacing */}
-          <div className="space-y-[100px]">
+        {/* Project Cards Section - within hero but below animated area */}
+        <div id="projects" className="relative z-10 mx-auto px-2 md:px-2 lg:px-[100px] xl:px-[180px] 2xl:px-[280px] pb-24 lg:pt-36 xl:pt-36">
+          {/* Projects Stack - 140px spacing */}
+          <div className="space-y-[140px]">
             {/* Project 1: Compliance */}
             <div>
               <ComplianceProjectCard
                 image="/images/Featured Projects/compliance-mockup.png"
                 onClick={() => window.open(`/portfolio/element/${encodeURIComponent('Simplifying Compliance Through Better Data Visibility')}`, '_blank')}
               />
-              <h2 className="font-sora font-normal text-[20px] italic text-foreground text-center mt-6">
-                {projects.element[3].homePageHeading}
-              </h2>
             </div>
 
             {/* Project 2: Payment Success */}
@@ -609,9 +636,6 @@ const Index = () => {
                 image="/images/Featured Projects/boosting payment success.png"
                 onClick={() => window.open(`/portfolio/element/${encodeURIComponent('Boosting Payment Success')}`, '_blank')}
               />
-              <h2 className="font-sora font-normal text-[20px] italic text-foreground text-center mt-6">
-                {projects.element[2].homePageHeading}
-              </h2>
             </div>
 
             {/* Project 3: Workshop/ValGTP */}
@@ -620,28 +644,25 @@ const Index = () => {
                 image="/images/Featured Projects/ValGTP-mockup.png"
                 onClick={() => window.open(`/portfolio/element/${encodeURIComponent('How we used AI to simplify Rule Creation')}`, '_blank')}
               />
-              <h2 className="font-sora font-normal text-[20px] italic text-foreground text-center mt-6">
-                {projects.element[0].homePageHeading}
-              </h2>
             </div>
 
-            {/* Project 4: Design-Dev Gap */}
-            <div>
+            {/* Project 4: Design-Dev Gap - HIDDEN FOR NOW */}
+            {/* <div>
               <DesignDevProjectCard
                 image="/images/Featured Projects/Design-dev-gap.png"
                 onClick={() => window.open(`/portfolio/element/${encodeURIComponent('How We Fixed our Design-Dev Communication Gap')}`, '_blank')}
               />
-              <h2 className="font-sora font-normal text-[20px] italic text-foreground text-center mt-6">
+              <h2 className="font-sora font-normal text-[20px] italic text-white text-center mt-6">
                 {projects.element[1].homePageHeading}
               </h2>
-            </div>
+            </div> */}
           </div>
 
           {/* View More Work Button */}
           <div className="flex justify-center mb-16 mt-36">
             <button
               onClick={() => setShowMoreProjects(!showMoreProjects)}
-              className="border-2 border-text bg-transparent text-text hover:bg-purple hover:text-white hover:border-purple px-12 py-4 rounded-xl font-medium transition-all duration-300 w-full md:w-[260px] flex items-center justify-center gap-2 whitespace-nowrap"
+              className="border-2 border-white bg-transparent text-white hover:bg-purple hover:text-white hover:border-purple px-12 py-4 rounded-xl font-medium transition-all duration-300 w-full md:w-[260px] flex items-center justify-center gap-2 whitespace-nowrap"
             >
               {showMoreProjects ? 'View less' : 'View more work'}
               {showMoreProjects ? (
@@ -681,14 +702,13 @@ const Index = () => {
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Contact Card */}
-        <div id="about" className="mt-4 mb-4">
-          <ContactCard />
-        </div>
+      {/* Content Cards */}
+      <div className="mx-auto px-2 md:px-2 lg:px-[100px] xl:px-[180px] 2xl:px-[280px] pt-24 pb-96 space-y-4 bg-riso-black">
 
-        {/* Card 2: Who is Karin? */}
-        <div className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-16 md:pb-[72px] md:pr-16 text-text">
+        {/* Card 2: Who is Karin? - HIDDEN FOR NOW */}
+        {/* <div className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-16 md:pb-[72px] md:pr-16 text-text">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-12">Who is Karin?</h1>
 
           <p className="text-3xl text-text mb-6">
@@ -713,14 +733,15 @@ const Index = () => {
             </div>
           </div>
 
-        </div>
+        </div> */}
 
-        {/* Card 4: What can I bring? */}
-        <div className="bg-butter rounded-2xl p-6 md:pt-[72px] md:pl-16 md:pb-[72px] md:pr-16 text-text">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-text mb-8">What can I bring?</h1>
+        {/* What can I bring? Section */}
+        <div className="space-y-16">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-blush text-center">What can I bring?</h1>
 
           {/* Skills Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[18px] md:grid-rows-2">
+          <div className="flex justify-center">
+            <div className="inline-grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-[18px] md:grid-rows-2">
             {/* Row 1 */}
             <SkillCard
               title="Workflow Optimizer"
@@ -757,7 +778,7 @@ const Index = () => {
 
             <SkillCard
               title="Experience"
-              description="6 years of UX/UI design across diverse teams and projects."
+              description="5 years of UX/UI design across diverse teams and projects."
               isEven={false}
             >
               <ExperienceIcon size={80} />
@@ -770,6 +791,7 @@ const Index = () => {
             >
               <AlwaysLearningIcon size={80} />
             </SkillCard>
+            </div>
           </div>
         </div>
 
@@ -780,9 +802,14 @@ const Index = () => {
       </div>
     </main>
 
+    {/* Contact Card */}
+    <div id="about" className="bg-riso-black mx-auto px-2 md:px-2 lg:px-[100px] xl:px-[180px] 2xl:px-[280px] pt-24 pb-24">
+      <ContactCard />
+    </div>
+
     {/* Attribution */}
-    <div className="bg-greige text-center py-8">
-      <p className="text-sm text-text/60">
+    <div className="bg-riso-black text-center py-8">
+      <p className="text-sm text-blush">
         Designed with curiosity using Claude Code, React and Figma.
       </p>
     </div>

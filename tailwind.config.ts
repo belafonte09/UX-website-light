@@ -33,6 +33,7 @@ export default {
 				'butter': '#FAF9EF',
 				'rose': '#CD9EA1',
 				'lime': '#BFD22D',
+				'citron': '#FDFE70',
 				'purple': '#5556AF',
 				'pink': '#E36785',
 				'stroke': '#B3B3B3',

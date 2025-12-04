@@ -9,7 +9,7 @@ interface SkillCardProps {
 
 const SkillCard: React.FC<SkillCardProps> = ({ title, description, children, isEven = false }) => {
   return (
-    <div className="rounded-xl mx-0" style={{ backgroundColor: '#E4E3DD' }}>
+    <div className="rounded-xl mx-0 w-full md:w-[250px] md:h-[304px] lg:w-[265px] lg:h-[322px] xl:w-[280px] xl:h-[340px]" style={{ backgroundColor: '#E4E3DD' }}>
       {/* Desktop Layout - Vertical */}
       <div className="hidden md:flex flex-col h-full p-6">
         {/* Title */}
@@ -37,7 +37,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ title, description, children, isE
         </p>
 
         {/* SVG Container */}
-        <div className="flex justify-center items-end mt-auto">
+        <div className="flex justify-center items-center mt-auto">
           <div className="scale-125">
             {children}
           </div>

@@ -3,7 +3,7 @@ import { Star } from 'lucide-react';
 const ExperienceSection = () => {
   const experiences = [
     {
-      role: 'Senior UX Designer',
+      role: 'Product Designer',
       company: 'TechFlow Solutions',
       period: 'Jan 2022 – Present',
       description: 'Leading design for a B2B SaaS platform used by 50k+ users. Redesigned the core user experience, resulting in 40% increase in user engagement and 25% reduction in support tickets. Mentored junior designers and established design system standards.',

@@ -27,7 +27,6 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
     { name: 'Simplifying Compliance Through Better Data Visibility', company: 'element', displayName: 'Designing a Dashboard for instant insights' },
     { name: 'Boosting Payment Success', company: 'element', displayName: 'Simplifying customer payments' },
     { name: 'How we used AI to simplify Rule Creation', company: 'element', displayName: 'How we used AI to simplify Rule Creation' },
-    { name: 'How We Fixed our Design-Dev Communication Gap', company: 'element', displayName: 'Optimizing our Design-Dev communication' },
   ];
 
   const moreProjects = [

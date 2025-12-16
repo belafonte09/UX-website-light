@@ -13,7 +13,7 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
     <div className="w-full max-w-[624px] lg:max-w-[662px] xl:max-w-[700px] mx-auto">
       {/* Main Card Container */}
       <div
-        className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
+        className="group cursor-pointer w-full"
         onClick={onClick}
       >
         {/* Card - 624×429.06px with greige background */}
@@ -22,21 +22,27 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
           <img
             src={image}
             alt="Payment Success project mockup"
-            className="w-full h-auto aspect-[624/429.06] object-cover group-hover:opacity-0 transition-opacity duration-300"
+            className="w-full h-auto object-cover group-hover:opacity-0 transition-opacity duration-300"
             style={{borderRadius: '40px'}}
           />
 
           {/* Animated overlay */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{borderRadius: '40px'}}>
-            {/* Custom SVG "b shaped" blob that grows from tiny to exact end placement */}
+            {/* Custom SVG blob that grows from tiny to exact end placement */}
             <svg
               className="payment-success-blob absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transform scale-[0.01] group-hover:scale-[120%] transition-all duration-300 ease-out origin-center hidden md:block"
-              viewBox="0 0 642 704"
+              viewBox="0 0 715 491"
               preserveAspectRatio="none"
             >
+              <defs>
+                <linearGradient id="paymentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#E4F86D" />
+                  <stop offset="100%" stopColor="#FAF9EF" />
+                </linearGradient>
+              </defs>
               <path
-                d="M4.23744e-05 426.908L13.8587 14.309L374.183 0.46341C482.835 -3.96718 548.802 24.4625 568.204 39.2311C652.465 90.183 647.66 185.995 634.726 227.532C614.769 325.005 532.172 347.527 493.367 346.604C406.889 353.25 385.27 364.142 385.27 368.757C385.27 382.049 473.965 392.756 518.313 396.448C609.226 423.032 624.563 505.367 620.867 543.212C618.65 678.345 486.9 706.59 421.303 703.821L3.02702e-05 703.821L4.23744e-05 426.908Z"
-                fill="#E36785"
+                d="M48.0043 133.692C89.7101 8.45582 301.349 -6.37482 401.955 1.86442C439.453 1.86442 529.266 7.90645 588.533 32.0746C662.615 62.2847 687.309 97.9885 706.516 196.859C721.881 275.956 606.825 321.364 547.375 334.18C577.557 334.18 687.309 386.362 706.516 444.037C721.881 490.176 712.918 534.668 706.516 551.147C708.711 621.455 559.265 655.511 484.268 663.75C410.185 671.989 234.582 678.581 124.83 639.032C15.0775 599.484 -3.21413 531.006 1.35906 501.711C-14.0062 409.432 104.709 351.574 165.987 334.18C105.624 317.702 75.4424 279.252 48.0043 238.056C26.0539 205.099 38.8583 154.748 48.0043 133.692Z"
+                fill="url(#paymentGradient)"
               />
             </svg>
 
@@ -46,7 +52,7 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
               <div>
                 {/* Title */}
                 <h3 className="payment-text text-[26px] font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
-                  Designing an email experience that drives faster,<br />easier customer payment
+                Designing an e-mail experience that drives faster, easier payments
                 </h3>
 
                 {/* Year */}
@@ -90,30 +96,30 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
       {/* Impact Card - Desktop only */}
       <div className="mt-4 w-full hidden md:block">
         <div
-          className="bg-blush w-[82.69%] lg:max-w-[516px] xl:max-w-[516px] mx-auto"
-          style={{borderRadius: '40px', aspectRatio: '516/260'}}
+          className="border border-[#F6F5F1] w-full"
+          style={{borderRadius: '24px'}}
         >
-          {/* Inner container with padding - 48px horizontal, 40px vertical */}
-          <div className="px-6 md:px-12 pt-6 md:pt-10 pb-6 md:pb-10 h-full">
+          {/* Inner container with padding - reduced vertical padding */}
+          <div className="px-6 md:px-12 py-10">
             {/* Content area - flexible width */}
-            <div className="w-full h-full flex items-center">
+            <div className="w-full flex">
               {/* Frame 615 - max 396px wide */}
               <div className="w-full max-w-[396px]">
                 {/* Frame 613 - Impact items with 16px spacing */}
                 <div className="flex flex-col gap-3 md:gap-4">
                   {/* Impact Heading - 396×36 */}
-                  <h3 className="text-[16px] md:text-[26px] font-work-sans font-semibold text-riso-black leading-6 md:leading-9">
+                  <h3 className="text-[16px] md:text-[26px] font-work-sans font-semibold text-[#F6F5F1] leading-6 md:leading-9">
                     Impact
                   </h3>
 
                   {/* Item 1 */}
-                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                  <p className="font-work-sans text-[#F6F5F1] flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
                     <span className="text-[16px] md:text-[24px] font-semibold">75%</span>
                     <span className="text-[14px] md:text-[16px] font-medium">reduction in weekly Helpdesk tickets</span>
                   </p>
 
                   {/* Item 2 */}
-                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                  <p className="font-work-sans text-[#F6F5F1] flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
                     <span className="text-[16px] md:text-[24px] font-semibold">60%</span>
                     <span className="text-[14px] md:text-[16px] font-medium">increase of on time payments</span>
                   </p>
@@ -126,15 +132,15 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
 
       {/* Impact Bullets - Mobile only */}
       <div className="mt-4 w-full px-4 md:hidden">
-        <ul className="space-y-2 text-blush">
+        <ul className="space-y-2 text-[#F6F5F1]">
           <li className="flex items-start gap-2">
-            <span className="mt-1.5 w-1 h-1 bg-blush rounded-full flex-shrink-0"></span>
+            <span className="mt-1.5 w-1 h-1 bg-[#F6F5F1] rounded-full flex-shrink-0"></span>
             <span className="text-[14px] font-work-sans">
               <span className="font-semibold">75%</span> reduction in weekly Helpdesk tickets
             </span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="mt-1.5 w-1 h-1 bg-blush rounded-full flex-shrink-0"></span>
+            <span className="mt-1.5 w-1 h-1 bg-[#F6F5F1] rounded-full flex-shrink-0"></span>
             <span className="text-[14px] font-work-sans">
               <span className="font-semibold">60%</span> increase of on time payments
             </span>
@@ -145,9 +151,14 @@ const PaymentSuccessProjectCard: React.FC<PaymentSuccessProjectCardProps> = ({
       <style jsx>{`
         /* Desktop hover animations only */
         @media (hover: hover) and (pointer: fine) {
+          .payment-text {
+            transition-delay: 0ms;
+          }
+
           .group:hover .payment-text {
             opacity: 1;
             transform: translateY(0);
+            transition-delay: 250ms;
           }
         }
 

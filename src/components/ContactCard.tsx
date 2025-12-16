@@ -157,7 +157,7 @@ const ContactCard: React.FC = () => {
       {/* Mobile Contact Buttons */}
       <div className="md:hidden flex flex-col gap-4">
         <MobileContactButton
-          href="https://docs.google.com/document/d/1a1HvTLUeWnqcciY6NEE_Kfmp7OAbA702/edit?usp=sharing&ouid=102463870981616514202&rtpof=true&sd=true"
+          href="https://drive.google.com/file/d/1u2e9nv7qHUgXFy9NmQrjfaeL5bdb2IiA/view?usp=sharing"
           onMouseEnter={handleResumeHover}
           onMouseLeave={handleMouseLeave}
           icon={<User size={20} />}
@@ -199,7 +199,7 @@ const ContactCard: React.FC = () => {
       {/* Desktop Contact Links */}
       <div className="hidden md:flex flex-row items-end gap-8 md:gap-16">
         <ContactLink
-          href="https://docs.google.com/document/d/1a1HvTLUeWnqcciY6NEE_Kfmp7OAbA702/edit?usp=sharing&ouid=102463870981616514202&rtpof=true&sd=true"
+          href="https://drive.google.com/file/d/1u2e9nv7qHUgXFy9NmQrjfaeL5bdb2IiA/view?usp=sharing"
           onMouseEnter={handleResumeHover}
           onMouseLeave={handleMouseLeave}
         >

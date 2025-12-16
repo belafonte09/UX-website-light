@@ -60,7 +60,7 @@ const ViewMoreProjectCard: React.FC<ViewMoreProjectCardProps> = ({
   return (
     <div className="w-full max-w-[624px] lg:max-w-[662px] xl:max-w-[700px] mx-auto">
       <div
-        className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
+        className="group cursor-pointer w-full"
         onClick={handleImageClick}
       >
         {/* Image Container */}
@@ -70,7 +70,7 @@ const ViewMoreProjectCard: React.FC<ViewMoreProjectCardProps> = ({
           <img
             src={config.imageSrc}
             alt={`${config.displayTitle} mockup`}
-            className="w-full h-auto aspect-[620/426] object-cover group-hover:opacity-0 transition-opacity duration-300"
+            className="w-full h-auto object-cover group-hover:opacity-0 transition-opacity duration-300"
             style={{borderRadius: '32px'}}
           />
 
@@ -79,12 +79,18 @@ const ViewMoreProjectCard: React.FC<ViewMoreProjectCardProps> = ({
             {/* Custom SVG blob that grows from tiny to exact end placement */}
             <svg
               className="project-blob absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transform scale-[0.01] group-hover:scale-[120%] transition-all duration-300 ease-out origin-center hidden md:block"
-              viewBox="0 0 621 427"
+              viewBox="0 0 715 670"
               preserveAspectRatio="none"
             >
+              <defs>
+                <linearGradient id="viewMoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#E4F86D" />
+                  <stop offset="100%" stopColor="#FAF9EF" />
+                </linearGradient>
+              </defs>
               <path
-                d="M11.4642 40.7153C50.0943 -75.1752 246.125 -88.8991 339.312 -81.2747C374.045 -81.2747 457.235 -75.6836 512.13 -53.319C580.75 -25.3634 603.623 7.67594 621.413 99.1684C635.645 172.362 529.073 214.381 474.008 226.241C501.964 226.241 603.623 274.529 621.413 327.9C635.645 370.596 627.343 411.768 621.413 427.016C623.446 492.078 485.021 523.592 415.555 531.216C346.936 538.841 184.282 544.94 82.6239 508.343C-19.0344 471.746 -35.9771 408.379 -31.7412 381.27C-45.9733 295.877 63.9871 242.337 120.746 226.241C64.8342 210.993 36.8788 175.412 11.4642 137.29C-8.86748 106.793 2.99265 60.1996 11.4642 40.7153Z"
-                fill={config.blobColor}
+                d="M48.0043 133.692C89.7101 8.45582 301.349 -6.37482 401.955 1.86442C439.453 1.86442 529.266 7.90645 588.533 32.0746C662.615 62.2847 687.309 97.9885 706.516 196.859C721.881 275.956 606.825 321.364 547.375 334.18C577.557 334.18 687.309 386.362 706.516 444.037C721.881 490.176 712.918 534.668 706.516 551.147C708.711 621.455 559.265 655.511 484.268 663.75C410.185 671.989 234.582 678.581 124.83 639.032C15.0775 599.484 -3.21413 531.006 1.35906 501.711C-14.0062 409.432 104.709 351.574 165.987 334.18C105.624 317.702 75.4424 279.252 48.0043 238.056C26.0539 205.099 38.8583 154.748 48.0043 133.692Z"
+                fill="url(#viewMoreGradient)"
               />
             </svg>
 

@@ -276,6 +276,7 @@ const Index = () => {
     const heroSection = document.getElementById('hero-outer-section');
     if (!heroSection) return;
 
+    // Initialize heroRect - will be properly measured after layout completes
     let heroRect = heroSection.getBoundingClientRect();
 
     // Constrain shapes to 1280×800 viewport
@@ -454,24 +455,37 @@ const Index = () => {
       animationId = requestAnimationFrame(animate);
     };
 
-    // Initialize all shapes: reset transforms and store initial positions
-    shapes.forEach(shape => {
-      const element = document.getElementById(shape.id);
-      if (element) {
-        // Reset transform to ensure shapes start at CSS positions
-        element.style.transform = 'translate(0px, 0px)';
+    // Initialize shapes after layout is complete to ensure correct positioning
+    const initializeShapes = () => {
+      // Remeasure hero section to get accurate dimensions after layout
+      heroRect = heroSection.getBoundingClientRect();
+      constrainedMaxX = Math.min(1, maxWidth / heroRect.width);
+      constrainedMaxY = Math.min(1, maxHeight / heroRect.height);
 
-        // Store the shape's starting position from the shapes array
-        // These match the CSS positions exactly
-        shape.initialX = shape.x;
-        shape.initialY = shape.y;
-      }
-    });
+      // Reset transforms and store initial positions
+      shapes.forEach(shape => {
+        const element = document.getElementById(shape.id);
+        if (element) {
+          // Reset transform to ensure shapes start at CSS positions
+          element.style.transform = 'translate(0px, 0px)';
 
-    // Start animation after a brief delay to ensure shapes are visible at initial positions
-    setTimeout(() => {
+          // Store the shape's starting position from the shapes array
+          // These match the CSS positions exactly
+          shape.initialX = shape.x;
+          shape.initialY = shape.y;
+        }
+      });
+
+      // Start animation
       animate();
-    }, 100);
+    };
+
+    // Wait for layout to complete before initializing
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        initializeShapes();
+      });
+    });
 
     return () => {
       if (animationId) {
@@ -625,7 +639,7 @@ const Index = () => {
             {/* Project 1: Compliance */}
             <div>
               <ComplianceProjectCard
-                image="/images/Featured Projects/compliance-mockup.png"
+                image="/images/mockups new/compliance-mockup.png"
                 onClick={() => window.open(`/portfolio/element/${encodeURIComponent('Simplifying Compliance Through Better Data Visibility')}`, '_blank')}
               />
             </div>
@@ -662,7 +676,7 @@ const Index = () => {
           <div className="flex justify-center mb-16 mt-36">
             <button
               onClick={() => setShowMoreProjects(!showMoreProjects)}
-              className="border-2 border-white bg-transparent text-white hover:bg-purple hover:text-white hover:border-purple px-12 py-4 rounded-xl font-medium transition-all duration-300 w-full md:w-[260px] flex items-center justify-center gap-2 whitespace-nowrap"
+              className="bg-citron text-black hover:bg-purple hover:text-white px-12 py-4 rounded-xl font-medium transition-all duration-300 w-full md:w-[260px] flex items-center justify-center gap-2 whitespace-nowrap"
             >
               {showMoreProjects ? 'View less' : 'View more work'}
               {showMoreProjects ? (

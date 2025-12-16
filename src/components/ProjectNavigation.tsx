@@ -80,7 +80,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = () => {
           </ProjectsDropdownMenu>
 
           <a
-            href="https://docs.google.com/document/d/1a1HvTLUeWnqcciY6NEE_Kfmp7OAbA702/edit"
+            href="https://drive.google.com/file/d/1u2e9nv7qHUgXFy9NmQrjfaeL5bdb2IiA/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-block text-black transition-all duration-300 no-underline font-normal text-base uppercase tracking-wide focus:outline-none active:text-purple px-2 py-1 hover:bg-transparent select-none"
@@ -190,7 +190,7 @@ const ProjectNavigation: React.FC<ProjectNavigationProps> = () => {
             </ProjectsDropdownMenu>
 
             <a
-              href="https://docs.google.com/document/d/1a1HvTLUeWnqcciY6NEE_Kfmp7OAbA702/edit"
+              href="https://drive.google.com/file/d/1u2e9nv7qHUgXFy9NmQrjfaeL5bdb2IiA/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMenuOpen(false)}

@@ -13,16 +13,16 @@ const ComplianceProjectCard: React.FC<ComplianceProjectCardProps> = ({
     <div className="w-full max-w-[624px] lg:max-w-[662px] xl:max-w-[700px] mx-auto">
       {/* Main Card Container */}
       <div
-        className="group cursor-pointer hover:opacity-80 transition-opacity duration-300 w-full"
+        className="group cursor-pointer w-full"
         onClick={onClick}
       >
         {/* Card - 624×429.06px with greige background */}
-        <div className="relative bg-greige overflow-hidden w-full" style={{borderRadius: '40px'}}>
+        <div className="relative bg-greige overflow-hidden w-full" style={{borderRadius: '40px', aspectRatio: '624/429.06'}}>
           {/* Base project image */}
           <img
             src={image}
             alt="Compliance project mockup"
-            className="w-full h-auto aspect-[624/429.06] object-cover group-hover:opacity-0 transition-opacity duration-300"
+            className="w-full h-full object-cover group-hover:opacity-0 transition-opacity duration-300"
             style={{borderRadius: '40px'}}
           />
 
@@ -31,12 +31,18 @@ const ComplianceProjectCard: React.FC<ComplianceProjectCardProps> = ({
             {/* Custom SVG blob that grows from tiny to exact end placement */}
             <svg
               className="compliance-blob absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transform scale-[0.01] group-hover:scale-[120%] transition-all duration-300 ease-out origin-center hidden md:block"
-              viewBox="0 0 621 427"
+              viewBox="0 0 715 491"
               preserveAspectRatio="none"
             >
+              <defs>
+                <linearGradient id="complianceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#E4F86D" />
+                  <stop offset="100%" stopColor="#FAF9EF" />
+                </linearGradient>
+              </defs>
               <path
-                d="M11.4642 40.7153C50.0943 -75.1752 246.125 -88.8991 339.312 -81.2747C374.045 -81.2747 457.235 -75.6836 512.13 -53.319C580.75 -25.3634 603.623 7.67594 621.413 99.1684C635.645 172.362 529.073 214.381 474.008 226.241C501.964 226.241 603.623 274.529 621.413 327.9C635.645 370.596 627.343 411.768 621.413 427.016C623.446 492.078 485.021 523.592 415.555 531.216C346.936 538.841 184.282 544.94 82.6239 508.343C-19.0344 471.746 -35.9771 408.379 -31.7412 381.27C-45.9733 295.877 63.9871 242.337 120.746 226.241C64.8342 210.993 36.8788 175.412 11.4642 137.29C-8.86748 106.793 2.99265 60.1996 11.4642 40.7153Z"
-                fill="#FDFE70"
+                d="M48.0043 133.692C89.7101 8.45582 301.349 -6.37482 401.955 1.86442C439.453 1.86442 529.266 7.90645 588.533 32.0746C662.615 62.2847 687.309 97.9885 706.516 196.859C721.881 275.956 606.825 321.364 547.375 334.18C577.557 334.18 687.309 386.362 706.516 444.037C721.881 490.176 712.918 534.668 706.516 551.147C708.711 621.455 559.265 655.511 484.268 663.75C410.185 671.989 234.582 678.581 124.83 639.032C15.0775 599.484 -3.21413 531.006 1.35906 501.711C-14.0062 409.432 104.709 351.574 165.987 334.18C105.624 317.702 75.4424 279.252 48.0043 238.056C26.0539 205.099 38.8583 154.748 48.0043 133.692Z"
+                fill="url(#complianceGradient)"
               />
             </svg>
 
@@ -90,36 +96,36 @@ const ComplianceProjectCard: React.FC<ComplianceProjectCardProps> = ({
       {/* Impact Card - Desktop only */}
       <div className="mt-4 w-full hidden md:block">
         <div
-          className="bg-blush w-[82.69%] lg:max-w-[516px] xl:max-w-[516px] mx-auto"
-          style={{borderRadius: '40px', aspectRatio: '516/260'}}
+          className="border border-[#F6F5F1] w-full"
+          style={{borderRadius: '24px'}}
         >
-          {/* Inner container with padding - 48px horizontal, 40px vertical */}
-          <div className="px-6 md:px-12 pt-6 md:pt-10 pb-6 md:pb-10 h-full">
+          {/* Inner container with padding - reduced vertical padding */}
+          <div className="px-6 md:px-12 py-10">
             {/* Content area - flexible width */}
-            <div className="w-full h-full flex items-center">
+            <div className="w-full flex">
               {/* Frame 615 - max 396px wide */}
               <div className="w-full max-w-[396px]">
                 {/* Frame 613 - Impact items with 16px spacing */}
                 <div className="flex flex-col gap-3 md:gap-4">
                   {/* Impact Heading - 396×36 */}
-                  <h3 className="text-[16px] md:text-[26px] font-work-sans font-semibold text-riso-black leading-6 md:leading-9">
+                  <h3 className="text-[16px] md:text-[26px] font-work-sans font-semibold text-[#F6F5F1] leading-6 md:leading-9">
                     Impact
                   </h3>
 
                   {/* Item 1 */}
-                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                  <p className="font-work-sans text-[#F6F5F1] flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
                     <span className="text-[16px] md:text-[24px] font-semibold">90%</span>
                     <span className="text-[14px] md:text-[16px] font-medium">reduction in processing time per file</span>
                   </p>
 
                   {/* Item 2 */}
-                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                  <p className="font-work-sans text-[#F6F5F1] flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
                     <span className="text-[16px] md:text-[24px] font-semibold">80%</span>
                     <span className="text-[14px] md:text-[16px] font-medium">less reliance on engineers</span>
                   </p>
 
                   {/* Item 3 */}
-                  <p className="font-work-sans text-riso-black flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
+                  <p className="font-work-sans text-[#F6F5F1] flex flex-wrap md:whitespace-nowrap items-baseline gap-1">
                     <span className="text-[16px] md:text-[24px] font-semibold">95%</span>
                     <span className="text-[14px] md:text-[16px] font-medium">Higher data accuracy</span>
                   </p>
@@ -132,21 +138,21 @@ const ComplianceProjectCard: React.FC<ComplianceProjectCardProps> = ({
 
       {/* Impact Bullets - Mobile only */}
       <div className="mt-4 w-full px-4 md:hidden">
-        <ul className="space-y-2 text-blush">
+        <ul className="space-y-2 text-[#F6F5F1]">
           <li className="flex items-start gap-2">
-            <span className="mt-1.5 w-1 h-1 bg-blush rounded-full flex-shrink-0"></span>
+            <span className="mt-1.5 w-1 h-1 bg-[#F6F5F1] rounded-full flex-shrink-0"></span>
             <span className="text-[14px] font-work-sans">
               <span className="font-semibold">90%</span> reduction in processing time per file
             </span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="mt-1.5 w-1 h-1 bg-blush rounded-full flex-shrink-0"></span>
+            <span className="mt-1.5 w-1 h-1 bg-[#F6F5F1] rounded-full flex-shrink-0"></span>
             <span className="text-[14px] font-work-sans">
               <span className="font-semibold">80%</span> less reliance on engineers
             </span>
           </li>
           <li className="flex items-start gap-2">
-            <span className="mt-1.5 w-1 h-1 bg-blush rounded-full flex-shrink-0"></span>
+            <span className="mt-1.5 w-1 h-1 bg-[#F6F5F1] rounded-full flex-shrink-0"></span>
             <span className="text-[14px] font-work-sans">
               <span className="font-semibold">95%</span> Higher data accuracy
             </span>
@@ -157,9 +163,14 @@ const ComplianceProjectCard: React.FC<ComplianceProjectCardProps> = ({
       <style jsx>{`
         /* Desktop hover animations only */
         @media (hover: hover) and (pointer: fine) {
+          .compliance-text {
+            transition-delay: 0ms;
+          }
+
           .group:hover .compliance-text {
             opacity: 1;
             transform: translateY(0);
+            transition-delay: 250ms;
           }
         }
 

@@ -6,6 +6,7 @@ import ContactCard from '../components/ContactCard';
 import SelectedProjectCard from '../components/SelectedProjectCard';
 import ViewMoreProjectCard from '../components/ViewMoreProjectCard';
 import ComplianceProjectCard from '../components/ComplianceProjectCard';
+import CouplesSchedulerProjectCard from '../components/CouplesSchedulerProjectCard';
 import DesignDevProjectCard from '../components/DesignDevProjectCard';
 import PaymentSuccessProjectCard from '../components/PaymentSuccessProjectCard';
 import AIRuleCreationProjectCard from '../components/AIRuleCreationProjectCard';
@@ -636,6 +637,19 @@ const Index = () => {
         <div id="projects" className="relative z-10 mx-auto px-2 md:px-2 lg:px-[100px] xl:px-[180px] 2xl:px-[280px] pb-24 lg:pt-36 xl:pt-36">
           {/* Projects Stack - 140px spacing */}
           <div className="space-y-[140px]">
+            {/* Project 0: Couple's scheduler (PDF case study) */}
+            <div>
+              <CouplesSchedulerProjectCard
+                image="/images/mockups new/Personal project mockup.png"
+                onClick={() =>
+                  window.open(
+                    `/couples scheduler/${encodeURIComponent("Couple's Scheduler.pdf")}`,
+                    '_blank'
+                  )
+                }
+              />
+            </div>
+
             {/* Project 1: Compliance */}
             <div>
               <ComplianceProjectCard

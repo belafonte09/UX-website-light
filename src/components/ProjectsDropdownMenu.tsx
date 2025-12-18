@@ -35,6 +35,10 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
     { name: 'Designing a foodsharing experience', company: 'freelance', displayName: 'Designing a foodsharing experience' },
   ];
 
+  const personalProjects = [
+    { name: "Couple's Scheduler", displayName: "Couple's Scheduler", pdfUrl: "/couples scheduler/Couple's Scheduler.pdf" }
+  ];
+
   const handleProjectClick = (company: string, projectName: string) => {
     navigate(`/portfolio/${company}/${encodeURIComponent(projectName)}`);
   };
@@ -45,6 +49,10 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
     if (project?.pdfUrl) {
       window.open(project.pdfUrl, '_blank');
     }
+  };
+
+  const handlePersonalProjectClick = (pdfUrl: string) => {
+    window.open(pdfUrl, '_blank');
   };
 
   return (
@@ -78,6 +86,21 @@ const ProjectsDropdownMenu: React.FC<ProjectsDropdownMenuProps> = ({ children })
           <DropdownMenuItem
             key={index}
             onClick={() => handleMoreWorkProjectClick(project.company, project.name)}
+            className="py-2.5 md:py-3 pl-3 pr-2 text-sm md:text-base font-work-sans text-foreground cursor-pointer hover:bg-citron transition-all duration-200 rounded-lg"
+          >
+            {project.displayName}
+          </DropdownMenuItem>
+        ))}
+
+        <DropdownMenuSeparator className="my-4 bg-stroke" />
+
+        <DropdownMenuLabel className="text-xs md:text-sm font-sora font-semibold text-foreground mb-2">
+          Personal Projects
+        </DropdownMenuLabel>
+        {personalProjects.map((project, index) => (
+          <DropdownMenuItem
+            key={index}
+            onClick={() => handlePersonalProjectClick(project.pdfUrl)}
             className="py-2.5 md:py-3 pl-3 pr-2 text-sm md:text-base font-work-sans text-foreground cursor-pointer hover:bg-citron transition-all duration-200 rounded-lg"
           >
             {project.displayName}

@@ -643,7 +643,7 @@ const Index = () => {
                 image="/images/mockups new/Personal project mockup.png"
                 onClick={() =>
                   window.open(
-                    `/couples scheduler/${encodeURIComponent('Slide 16_9 - 30.pdf')}`,
+                    `/couples scheduler/${encodeURIComponent("Couple's Scheduler.pdf")}`,
                     '_blank'
                   )
                 }

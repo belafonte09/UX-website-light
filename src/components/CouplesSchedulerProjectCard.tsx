@@ -58,12 +58,12 @@ const CouplesSchedulerProjectCard: React.FC<CouplesSchedulerProjectCardProps> = 
               <div>
                 {/* Title */}
                 <h3 className="couples-text text-[26px] font-sora font-normal text-black leading-tight mb-4 opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
-                  Couple&apos;s scheduler — mobile family planner
+                  Couple&apos;s scheduler — custom family planner
                 </h3>
 
                 {/* Year */}
                 <p className="couples-text text-[26px] font-sora font-normal text-black opacity-0 transform translate-y-4 transition-all duration-150 ease-out">
-                  2024
+                  2025
                 </p>
               </div>
 
